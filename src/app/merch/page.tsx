@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 
 const LS_KEY = 'irapoa_merch_orders';
+const SS_AUTH_KEY = 'irapoa_merch_auth';
+const PASSWORD = 'iraopa2026';
 
 type MerchItem = {
   id: string;
@@ -84,14 +86,80 @@ function saveOrders(orders: Order[]) {
 }
 
 export default function MerchPage() {
+  const [authenticated, setAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
   const [orders, setOrders] = useState<Order[]>([]);
   const [orderItem, setOrderItem] = useState<MerchItem | null>(null);
   const [form, setForm] = useState({ name: '', email: '', size: '', quantity: 1 });
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
+    if (typeof window !== 'undefined' && sessionStorage.getItem(SS_AUTH_KEY) === '1') {
+      setAuthenticated(true);
+    }
     setOrders(loadOrders());
   }, []);
+
+  function handlePasswordSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (passwordInput === PASSWORD) {
+      sessionStorage.setItem(SS_AUTH_KEY, '1');
+      setAuthenticated(true);
+      setPasswordError('');
+    } else {
+      setPasswordError('Incorrect password. Please try again.');
+    }
+  }
+
+  if (!authenticated) {
+    return (
+      <main>
+        <section style={{ backgroundColor: '#1B3A5C' }} className="py-12 px-4">
+          <div className="max-w-5xl mx-auto">
+            <nav className="text-sm text-blue-300 mb-4">
+              <a href="/" className="hover:text-white transition-colors">Home</a>
+              <span className="mx-2">/</span>
+              <span className="text-white">Merch Store</span>
+            </nav>
+            <h1 className="text-4xl font-bold text-white mb-2">IRAPOA Community Store</h1>
+            <p className="text-blue-200">Members only — enter the community password to access.</p>
+          </div>
+        </section>
+        <section style={{ backgroundColor: '#F5F5F0' }} className="min-h-[60vh] flex items-center justify-center px-4 py-16">
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 w-full max-w-sm">
+            <div className="flex justify-center mb-5">
+              <div className="w-14 h-14 rounded-full flex items-center justify-center text-3xl" style={{ backgroundColor: '#EFF6FF' }}>
+                🔒
+              </div>
+            </div>
+            <h2 className="text-xl font-bold text-center mb-1" style={{ color: '#1B3A5C' }}>Members Only</h2>
+            <p className="text-gray-500 text-sm text-center mb-6">Enter the community password to access the merch store.</p>
+            <form onSubmit={handlePasswordSubmit} className="space-y-4">
+              <input
+                type="password"
+                required
+                value={passwordInput}
+                onChange={e => { setPasswordInput(e.target.value); setPasswordError(''); }}
+                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
+                placeholder="Community password"
+                autoFocus
+              />
+              {passwordError && <p className="text-red-600 text-xs">{passwordError}</p>}
+              <button
+                type="submit"
+                className="w-full py-2 rounded-lg text-white font-semibold text-sm transition-colors"
+                style={{ backgroundColor: '#1B3A5C' }}
+              >
+                Enter Store
+              </button>
+            </form>
+          </div>
+        </section>
+      </main>
+    );
+  }
 
   function openOrder(item: MerchItem) {
     setOrderItem(item);
