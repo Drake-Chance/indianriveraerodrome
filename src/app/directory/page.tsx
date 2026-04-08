@@ -3,7 +3,7 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import directoryData from '@/data/directory.json';
 
-const PASSWORD = 'fl74community';
+const PASSWORD = 'iraopa2026';
 
 type Resident = {
   id: number;
