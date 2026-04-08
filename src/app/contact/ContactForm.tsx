@@ -3,7 +3,7 @@
 import { useState, FormEvent } from 'react';
 
 // Replace with your Web3Forms access key
-const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE';
+const WEB3FORMS_KEY = 'cc05d424-ffbc-401b-ae43-4242348f20d5';
 
 export default function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
