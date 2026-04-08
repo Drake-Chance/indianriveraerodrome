@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import ContactForm from './ContactForm';
 
 export const metadata: Metadata = {
   title: 'Contact — IRAPOA',
@@ -35,83 +36,7 @@ export default function ContactPage() {
 
             {/* Contact Form */}
             <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-1">Send a Message</h2>
-              <p className="text-gray-500 text-sm mb-6">
-                Fill out the form below and a board member will respond within a few business days.
-              </p>
-
-              <form
-                action={`mailto:contact@indianriveraerodrome.com`}
-                method="get"
-                encType="text/plain"
-                className="space-y-5"
-              >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                      Full Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      placeholder="John Smith"
-                      className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent bg-white"
-                      style={{ '--tw-ring-color': '#4A90D9' } as React.CSSProperties}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                      Email Address <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      placeholder="you@example.com"
-                      className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent bg-white"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
-                    Subject <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    required
-                    placeholder="What is this regarding?"
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent bg-white"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                    Message <span className="text-red-500">*</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    name="body"
-                    required
-                    rows={6}
-                    placeholder="Describe your question or concern in detail..."
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent bg-white resize-y"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full sm:w-auto px-8 py-3 rounded-xl text-white font-semibold transition-opacity hover:opacity-90"
-                  style={{ backgroundColor: '#1B3A5C' }}
-                >
-                  Send Message
-                </button>
-              </form>
+              <ContactForm />
             </div>
 
             {/* Sidebar: Contact Info */}
