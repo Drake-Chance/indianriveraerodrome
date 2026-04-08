@@ -131,8 +131,8 @@ export default function ChatWidget() {
                 </button>
                 <p className="text-gray-400 text-xs text-center">
                   Or email us directly at{' '}
-                  <a href="mailto:iraerodrome@gmail.com" className="text-blue-500 hover:underline">
-                    iraerodrome@gmail.com
+                  <a href="mailto:contact@indianriveraerodrome.com" className="text-blue-500 hover:underline">
+                    contact@indianriveraerodrome.com
                   </a>
                 </p>
               </form>

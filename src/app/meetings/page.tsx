@@ -223,8 +223,8 @@ export default function MeetingsPage() {
                 </li>
                 <li>
                   <p className="text-blue-300 text-xs uppercase tracking-wide">Contact</p>
-                  <a href="mailto:iraerodrome@gmail.com" className="font-medium mt-0.5 block text-blue-200 hover:text-white transition-colors">
-                    iraerodrome@gmail.com
+                  <a href="mailto:contact@indianriveraerodrome.com" className="font-medium mt-0.5 block text-blue-200 hover:text-white transition-colors">
+                    contact@indianriveraerodrome.com
                   </a>
                 </li>
               </ul>

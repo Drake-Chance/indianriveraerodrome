@@ -135,8 +135,8 @@ export default function DirectoryPage() {
                 </form>
                 <p className="mt-4 text-xs text-gray-400 text-center">
                   Contact the board at{' '}
-                  <a href="mailto:iraerodrome@gmail.com" className="underline" style={{ color: '#4A90D9' }}>
-                    iraerodrome@gmail.com
+                  <a href="mailto:contact@indianriveraerodrome.com" className="underline" style={{ color: '#4A90D9' }}>
+                    contact@indianriveraerodrome.com
                   </a>{' '}
                   if you need access.
                 </p>

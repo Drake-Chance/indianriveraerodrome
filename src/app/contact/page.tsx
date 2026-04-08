@@ -41,7 +41,7 @@ export default function ContactPage() {
               </p>
 
               <form
-                action={`mailto:iraerodrome@gmail.com`}
+                action={`mailto:contact@indianriveraerodrome.com`}
                 method="get"
                 encType="text/plain"
                 className="space-y-5"
@@ -132,11 +132,11 @@ export default function ContactPage() {
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-0.5">Email</p>
                       <a
-                        href="mailto:iraerodrome@gmail.com"
+                        href="mailto:contact@indianriveraerodrome.com"
                         className="text-sm font-medium hover:underline"
                         style={{ color: '#4A90D9' }}
                       >
-                        iraerodrome@gmail.com
+                        contact@indianriveraerodrome.com
                       </a>
                     </div>
                   </div>
