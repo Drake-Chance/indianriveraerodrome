@@ -93,7 +93,7 @@ const announcements = [
     date: 'March 15, 2026',
     title: '2026 Annual Meeting — Save the Date',
     excerpt:
-      'Mark your calendars: the Annual Community Meeting is scheduled for June 14, 2026 at 10:00 AM at the Community Clubhouse. Ballot and proxy materials will be mailed.',
+      'Mark your calendars: the Annual Community Meeting is scheduled for June 14, 2026 at 10:00 AM. Location TBD — details will be mailed with ballot and proxy materials.',
     tag: 'Annual Meeting',
     tagColor: '#059669',
   },
@@ -106,31 +106,11 @@ export default function HomePage() {
       <section
         className="relative min-h-[520px] flex items-center overflow-hidden"
         style={{
-          background: 'linear-gradient(135deg, #0d2236 0%, #1B3A5C 50%, #1e4a72 100%)',
+          background: "linear-gradient(rgba(27,58,92,0.7), rgba(27,58,92,0.85)), url('/background.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
-        {/* SVG runway/grid pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="runway" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
-                <line x1="40" y1="0" x2="40" y2="80" stroke="white" strokeWidth="0.5" strokeDasharray="8 8" />
-                <line x1="0" y1="40" x2="80" y2="40" stroke="white" strokeWidth="0.5" strokeDasharray="8 8" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#runway)" />
-          </svg>
-        </div>
-
-        {/* Decorative plane silhouette */}
-        <div className="absolute right-8 top-1/2 -translate-y-1/2 opacity-5 hidden lg:block">
-          <svg width="400" height="300" viewBox="0 0 400 300" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path d="M200 60 L360 180 L200 150 L40 180 Z" />
-            <path d="M200 150 L200 240 L180 215 L200 150 Z" />
-            <path d="M80 185 L120 195 L115 210 Z" />
-            <path d="M320 185 L280 195 L285 210 Z" />
-          </svg>
-        </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-white">
           <div className="max-w-2xl">
@@ -207,7 +187,7 @@ export default function HomePage() {
                   Next Board Meeting
                 </p>
                 <p className="text-xl font-bold text-gray-900">May 12, 2026 at 6:00 PM</p>
-                <p className="text-sm text-gray-500">Community Clubhouse · Indian River Aerodrome</p>
+                <p className="text-sm text-gray-500">Location TBD · Indian River Aerodrome</p>
               </div>
             </div>
             <Link

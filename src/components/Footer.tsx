@@ -8,10 +8,8 @@ export default function Footer() {
           {/* Brand column */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <svg width="32" height="32" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18 8 L28 22 L18 19 L8 22 Z" fill="#4A90D9" />
-                <path d="M18 19 L18 28 L15 25 L18 19 Z" fill="#4A90D9" fillOpacity="0.8" />
-              </svg>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.png" alt="IRAPOA" className="h-8 w-auto" />
               <span className="text-white font-bold text-lg">IRAPOA</span>
             </div>
             <p className="text-blue-300 text-sm leading-relaxed mb-4">

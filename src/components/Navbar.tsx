@@ -25,37 +25,12 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <svg
-              width="36"
-              height="36"
-              viewBox="0 0 36 36"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="group-hover:scale-110 transition-transform duration-200"
-            >
-              <circle cx="18" cy="18" r="18" fill="#4A90D9" fillOpacity="0.15" />
-              <path
-                d="M18 8 L28 22 L18 19 L8 22 Z"
-                fill="#4A90D9"
-                stroke="#4A90D9"
-                strokeWidth="0.5"
-              />
-              <path
-                d="M18 19 L18 28 L15 25 L18 19 Z"
-                fill="#4A90D9"
-                fillOpacity="0.8"
-              />
-              <path
-                d="M10 20 L14 21 L13 23 Z"
-                fill="#4A90D9"
-                fillOpacity="0.6"
-              />
-              <path
-                d="M26 20 L22 21 L23 23 Z"
-                fill="#4A90D9"
-                fillOpacity="0.6"
-              />
-            </svg>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo.png"
+              alt="IRAPOA"
+              className="h-10 w-auto group-hover:scale-105 transition-transform duration-200"
+            />
             <div className="flex flex-col leading-tight">
               <span className="text-white font-bold text-lg tracking-wide">IRAPOA</span>
               <span className="text-blue-300 text-xs tracking-wider hidden sm:block">Indian River Aerodrome</span>

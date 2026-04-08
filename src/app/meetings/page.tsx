@@ -14,7 +14,7 @@ type Meeting = {
   status: string;
   minutesFile: string | null;
   time?: string;
-  location?: string;
+  location?: string | null;
 };
 
 function formatDate(dateStr: string) {
@@ -71,7 +71,7 @@ export default function MeetingsPage() {
                   </div>
                   <div>
                     <p className="text-blue-300 text-xs uppercase tracking-wide mb-1">Location</p>
-                    <p className="font-semibold">{nextMeeting.location || 'Community Clubhouse'}</p>
+                    <p className="font-semibold">{nextMeeting.location || 'TBD'}</p>
                   </div>
                 </div>
                 <div className="mt-5 flex gap-3">
@@ -218,8 +218,8 @@ export default function MeetingsPage() {
                   <p className="font-medium mt-0.5">6:00 PM</p>
                 </li>
                 <li>
-                  <p className="text-blue-300 text-xs uppercase tracking-wide">Default Location</p>
-                  <p className="font-medium mt-0.5">Community Clubhouse<br />Indian River Aerodrome</p>
+                  <p className="text-blue-300 text-xs uppercase tracking-wide">Location</p>
+                  <p className="font-medium mt-0.5">TBD — rotates at board members&apos; homes</p>
                 </li>
                 <li>
                   <p className="text-blue-300 text-xs uppercase tracking-wide">Contact</p>

@@ -1,21 +1,21 @@
 {
   "residents": [
-    {"id": 1, "name": "John & Mary Smith", "address": "1234 Nieuport Dr", "phone": "(772) 555-0101", "email": "jsmith@email.com", "aircraft": "Cessna 172", "hangar": "A1"},
-    {"id": 2, "name": "Bob & Carol Johnson", "address": "1236 Nieuport Dr", "phone": "(772) 555-0102", "email": "bjohnson@email.com", "aircraft": "Piper Cherokee", "hangar": "A2"},
-    {"id": 3, "name": "David Williams", "address": "1238 Nieuport Dr", "phone": "(772) 555-0103", "email": "dwilliams@email.com", "aircraft": "RV-7", "hangar": "A3"},
-    {"id": 4, "name": "Patricia Brown", "address": "1240 Nieuport Dr", "phone": "(772) 555-0104", "email": "pbrown@email.com", "aircraft": "", "hangar": ""},
-    {"id": 5, "name": "Michael & Linda Davis", "address": "1242 Nieuport Dr", "phone": "(772) 555-0105", "email": "mdavis@email.com", "aircraft": "Beechcraft Bonanza", "hangar": "B1"},
-    {"id": 6, "name": "James Miller", "address": "1244 Nieuport Dr", "phone": "(772) 555-0106", "email": "jmiller@email.com", "aircraft": "Cirrus SR22", "hangar": "B2"},
-    {"id": 7, "name": "Susan & Tom Wilson", "address": "101 Albatross Dr", "phone": "(772) 555-0107", "email": "twilson@email.com", "aircraft": "Piper Arrow", "hangar": "B3"},
-    {"id": 8, "name": "Richard Moore", "address": "103 Albatross Dr", "phone": "(772) 555-0108", "email": "rmoore@email.com", "aircraft": "", "hangar": ""},
-    {"id": 9, "name": "Jennifer Taylor", "address": "105 Albatross Dr", "phone": "(772) 555-0109", "email": "jtaylor@email.com", "aircraft": "Kitfox Series 7", "hangar": "C1"},
-    {"id": 10, "name": "Charles & Nancy Anderson", "address": "107 Albatross Dr", "phone": "(772) 555-0110", "email": "canderson@email.com", "aircraft": "Cessna 182", "hangar": "C2"},
-    {"id": 11, "name": "Nick Easterling", "address": "1250 Nieuport Dr", "phone": "(772) 555-0111", "email": "neasterling@email.com", "aircraft": "RV-10", "hangar": "C3", "role": "President"},
-    {"id": 12, "name": "Mike Conway", "address": "1252 Nieuport Dr", "phone": "(772) 555-0112", "email": "mconway@email.com", "aircraft": "Piper Saratoga", "hangar": "D1", "role": "Vice President"},
-    {"id": 13, "name": "Carole Ballough", "address": "1254 Nieuport Dr", "phone": "(772) 555-0113", "email": "cballough@email.com", "aircraft": "", "hangar": "", "role": "Treasurer"},
-    {"id": 14, "name": "Joshua Pageau", "address": "109 Albatross Dr", "phone": "(772) 555-0114", "email": "jpageau@email.com", "aircraft": "Lancair 360", "hangar": "D2", "role": "Secretary"},
-    {"id": 15, "name": "Ray Dyson", "address": "111 Albatross Dr", "phone": "(772) 555-0115", "email": "rdyson@email.com", "aircraft": "Piper Cub", "hangar": "D3", "role": "Airport Manager"},
-    {"id": 16, "name": "Brian Hayes", "address": "1256 Nieuport Dr", "phone": "(772) 555-0116", "email": "bhayes@email.com", "aircraft": "Zenith 750", "hangar": "E1", "role": "Director"},
-    {"id": 17, "name": "Lamberto Roscioli", "address": "113 Albatross Dr", "phone": "(772) 555-0117", "email": "lroscioli@email.com", "aircraft": "Extra 300", "hangar": "E2", "role": "Director"}
+    {"id": 1,  "name": "Resident 1",  "address": "1234 Nieuport Dr",  "phone": "(772) 555-0101", "email": "resident1@placeholder.com"},
+    {"id": 2,  "name": "Resident 2",  "address": "1236 Nieuport Dr",  "phone": "(772) 555-0102", "email": "resident2@placeholder.com"},
+    {"id": 3,  "name": "Resident 3",  "address": "1238 Nieuport Dr",  "phone": "(772) 555-0103", "email": "resident3@placeholder.com"},
+    {"id": 4,  "name": "Resident 4",  "address": "1240 Nieuport Dr",  "phone": "(772) 555-0104", "email": "resident4@placeholder.com"},
+    {"id": 5,  "name": "Resident 5",  "address": "1242 Nieuport Dr",  "phone": "(772) 555-0105", "email": "resident5@placeholder.com"},
+    {"id": 6,  "name": "Resident 6",  "address": "1244 Nieuport Dr",  "phone": "(772) 555-0106", "email": "resident6@placeholder.com"},
+    {"id": 7,  "name": "Resident 7",  "address": "101 Albatross Dr",  "phone": "(772) 555-0107", "email": "resident7@placeholder.com"},
+    {"id": 8,  "name": "Resident 8",  "address": "103 Albatross Dr",  "phone": "(772) 555-0108", "email": "resident8@placeholder.com"},
+    {"id": 9,  "name": "Resident 9",  "address": "105 Albatross Dr",  "phone": "(772) 555-0109", "email": "resident9@placeholder.com"},
+    {"id": 10, "name": "Resident 10", "address": "107 Albatross Dr",  "phone": "(772) 555-0110", "email": "resident10@placeholder.com"},
+    {"id": 11, "name": "Resident 11", "address": "1250 Nieuport Dr",  "phone": "(772) 555-0111", "email": "resident11@placeholder.com", "role": "President"},
+    {"id": 12, "name": "Resident 12", "address": "1252 Nieuport Dr",  "phone": "(772) 555-0112", "email": "resident12@placeholder.com", "role": "Vice President"},
+    {"id": 13, "name": "Resident 13", "address": "1254 Nieuport Dr",  "phone": "(772) 555-0113", "email": "resident13@placeholder.com", "role": "Treasurer"},
+    {"id": 14, "name": "Resident 14", "address": "109 Albatross Dr",  "phone": "(772) 555-0114", "email": "resident14@placeholder.com", "role": "Secretary"},
+    {"id": 15, "name": "Resident 15", "address": "111 Albatross Dr",  "phone": "(772) 555-0115", "email": "resident15@placeholder.com", "role": "Airport Manager"},
+    {"id": 16, "name": "Resident 16", "address": "1256 Nieuport Dr",  "phone": "(772) 555-0116", "email": "resident16@placeholder.com", "role": "Director"},
+    {"id": 17, "name": "Resident 17", "address": "113 Albatross Dr",  "phone": "(772) 555-0117", "email": "resident17@placeholder.com", "role": "Director"}
   ]
 }

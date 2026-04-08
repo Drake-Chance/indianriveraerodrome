@@ -6,6 +6,6 @@
     {"id": 4, "date": "2026-03-08", "type": "Board Meeting", "status": "completed", "minutesFile": "minutes-2026-03-08.pdf"},
     {"id": 5, "date": "2026-03-25", "type": "Special Meeting", "status": "completed", "minutesFile": "minutes-2026-03-25.pdf"},
     {"id": 6, "date": "2026-04-07", "type": "Board Meeting", "status": "completed", "minutesFile": "minutes-2026-04-07.pdf"},
-    {"id": 7, "date": "2026-05-12", "type": "Board Meeting", "status": "upcoming", "time": "6:00 PM", "location": "Community Clubhouse", "minutesFile": null}
+    {"id": 7, "date": "2026-05-12", "type": "Board Meeting", "status": "upcoming", "time": "6:00 PM", "location": null, "minutesFile": null}
   ]
 }
