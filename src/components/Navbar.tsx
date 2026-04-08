@@ -11,6 +11,8 @@ const navLinks = [
   { href: '/documents', label: 'Documents' },
   { href: '/meetings', label: 'Meetings' },
   { href: '/calendar', label: 'Calendar' },
+  { href: '/merch', label: 'Merch' },
+  { href: '/forum', label: 'Forum' },
   { href: '/directory', label: 'Directory' },
   { href: '/contact', label: 'Contact' },
 ];
