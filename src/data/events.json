@@ -1,0 +1,16 @@
+{
+  "events": [
+    {"id": 1, "date": "2026-01-14", "title": "Special Meeting", "type": "meeting", "time": "6:00 PM"},
+    {"id": 2, "date": "2026-01-19", "title": "Board Meeting", "type": "meeting", "time": "6:00 PM"},
+    {"id": 3, "date": "2026-02-16", "title": "Board Meeting", "type": "meeting", "time": "6:00 PM"},
+    {"id": 4, "date": "2026-03-08", "title": "Board Meeting", "type": "meeting", "time": "6:00 PM"},
+    {"id": 5, "date": "2026-03-25", "title": "Special Meeting", "type": "meeting", "time": "6:00 PM"},
+    {"id": 6, "date": "2026-04-07", "title": "Board Meeting", "type": "meeting", "time": "6:00 PM"},
+    {"id": 7, "date": "2026-05-12", "title": "Board Meeting", "type": "meeting", "time": "6:00 PM"},
+    {"id": 8, "date": "2026-06-14", "title": "Annual Community Meeting", "type": "annual", "time": "10:00 AM"},
+    {"id": 9, "date": "2026-04-15", "title": "Runway Maintenance", "type": "maintenance", "time": "8:00 AM"},
+    {"id": 10, "date": "2026-05-25", "title": "Community Cookout", "type": "community", "time": "4:00 PM"},
+    {"id": 11, "date": "2026-07-04", "title": "Independence Day Fly-In", "type": "community", "time": "10:00 AM"},
+    {"id": 12, "date": "2026-09-12", "title": "Fall Fly-In & BBQ", "type": "community", "time": "10:00 AM"}
+  ]
+}
