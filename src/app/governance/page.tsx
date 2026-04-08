@@ -7,13 +7,13 @@ export const metadata: Metadata = {
 };
 
 const boardMembers = [
-  { name: 'Nick Easterling',   role: 'President',       email: 'contact@indianriveraerodrome.com' },
-  { name: 'Mike Conway',       role: 'Vice President',  email: 'contact@indianriveraerodrome.com' },
-  { name: 'Carole Ballough',   role: 'Treasurer',       email: 'contact@indianriveraerodrome.com' },
-  { name: 'Joshua Pageau',     role: 'Secretary',       email: 'contact@indianriveraerodrome.com' },
-  { name: 'Ray Dyson',         role: 'Airport Manager', email: 'contact@indianriveraerodrome.com' },
-  { name: 'Brian Hayes',       role: 'Director',        email: 'contact@indianriveraerodrome.com' },
-  { name: 'Lamberto Roscioli', role: 'Director',        email: 'contact@indianriveraerodrome.com' },
+  { name: 'Nick Easterling',   role: 'President',       email: 'nickeast@aol.com' },
+  { name: 'Mike Conway',       role: 'Vice President',  email: 'mike.conway@royalfundmanagement.com' },
+  { name: 'Carole Ballough',   role: 'Treasurer',       email: 'cballough@gmail.com' },
+  { name: 'Joshua Pageau',     role: 'Secretary',       email: 'joshuapageau@gmail.com' },
+  { name: 'Ray Dyson',         role: 'Airport Manager', email: 'redyson50@yahoo.com' },
+  { name: 'Brian Hayes',       role: 'Director',        email: 'brian@hayesgroupinc.com' },
+  { name: 'Lamberto Roscioli', role: 'Director',        email: 'lamberto_r@yahoo.com' },
 ];
 
 const governingDocs = [

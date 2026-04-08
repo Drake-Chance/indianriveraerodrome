@@ -1,18 +1,11 @@
 import type { Metadata } from 'next';
+import CommunityGallery from './CommunityGallery';
 
 export const metadata: Metadata = {
   title: 'About FL74 — Indian River Aerodrome | IRAPOA',
   description: 'Learn about Indian River Aerodrome (FL74) — a private fly-in community in Vero Beach, Florida. Runway details, history, and location information.',
 };
 
-const galleryItems = [
-  { label: 'Runway 17 Approach', description: 'Looking north down the 2,567 ft turf runway', bg: '#1B3A5C' },
-  { label: 'Community Hangars', description: 'Rows of private hangars lining the taxiway', bg: '#2d5a8e' },
-  { label: 'Morning Departure', description: 'Clear Florida skies over Indian River County', bg: '#1e4a72' },
-  { label: 'Fly-In Gathering', description: 'Annual community fly-in event on the ramp', bg: '#4A90D9' },
-  { label: 'Sunset at FL74', description: 'Golden hour over the aerodrome', bg: '#2e6fad' },
-  { label: 'Taxiway View', description: 'The main taxiway connecting hangar rows', bg: '#1a3454' },
-];
 
 export default function AboutPage() {
   return (
@@ -198,40 +191,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Photo Gallery Placeholder */}
-      <section style={{ backgroundColor: '#F5F5F0' }} className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Aerodrome Gallery</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {galleryItems.map((item, index) => (
-              <div
-                key={index}
-                className="rounded-2xl overflow-hidden aspect-video flex items-end p-4 relative"
-                style={{ backgroundColor: item.bg }}
-              >
-                {/* Decorative aviation pattern */}
-                <div className="absolute inset-0 opacity-10">
-                  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <pattern id={`p${index}`} x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
-                        <circle cx="15" cy="15" r="1" fill="white" />
-                      </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill={`url(#p${index})`} />
-                  </svg>
-                </div>
-                <div className="relative z-10">
-                  <p className="text-white font-semibold text-sm">{item.label}</p>
-                  <p className="text-blue-200 text-xs mt-0.5">{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="text-center text-gray-400 mt-6 text-sm italic">
-            Photo gallery — images will be added by the community
-          </p>
-        </div>
-      </section>
+      <CommunityGallery />
     </>
   );
 }

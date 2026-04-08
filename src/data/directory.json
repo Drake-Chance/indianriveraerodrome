@@ -1,21 +1,386 @@
 {
   "residents": [
-    {"id": 1,  "name": "Resident 1",  "address": "1234 Nieuport Dr",  "phone": "(772) 555-0101", "email": "resident1@placeholder.com"},
-    {"id": 2,  "name": "Resident 2",  "address": "1236 Nieuport Dr",  "phone": "(772) 555-0102", "email": "resident2@placeholder.com"},
-    {"id": 3,  "name": "Resident 3",  "address": "1238 Nieuport Dr",  "phone": "(772) 555-0103", "email": "resident3@placeholder.com"},
-    {"id": 4,  "name": "Resident 4",  "address": "1240 Nieuport Dr",  "phone": "(772) 555-0104", "email": "resident4@placeholder.com"},
-    {"id": 5,  "name": "Resident 5",  "address": "1242 Nieuport Dr",  "phone": "(772) 555-0105", "email": "resident5@placeholder.com"},
-    {"id": 6,  "name": "Resident 6",  "address": "1244 Nieuport Dr",  "phone": "(772) 555-0106", "email": "resident6@placeholder.com"},
-    {"id": 7,  "name": "Resident 7",  "address": "101 Albatross Dr",  "phone": "(772) 555-0107", "email": "resident7@placeholder.com"},
-    {"id": 8,  "name": "Resident 8",  "address": "103 Albatross Dr",  "phone": "(772) 555-0108", "email": "resident8@placeholder.com"},
-    {"id": 9,  "name": "Resident 9",  "address": "105 Albatross Dr",  "phone": "(772) 555-0109", "email": "resident9@placeholder.com"},
-    {"id": 10, "name": "Resident 10", "address": "107 Albatross Dr",  "phone": "(772) 555-0110", "email": "resident10@placeholder.com"},
-    {"id": 11, "name": "Resident 11", "address": "1250 Nieuport Dr",  "phone": "(772) 555-0111", "email": "resident11@placeholder.com", "role": "President"},
-    {"id": 12, "name": "Resident 12", "address": "1252 Nieuport Dr",  "phone": "(772) 555-0112", "email": "resident12@placeholder.com", "role": "Vice President"},
-    {"id": 13, "name": "Resident 13", "address": "1254 Nieuport Dr",  "phone": "(772) 555-0113", "email": "resident13@placeholder.com", "role": "Treasurer"},
-    {"id": 14, "name": "Resident 14", "address": "109 Albatross Dr",  "phone": "(772) 555-0114", "email": "resident14@placeholder.com", "role": "Secretary"},
-    {"id": 15, "name": "Resident 15", "address": "111 Albatross Dr",  "phone": "(772) 555-0115", "email": "resident15@placeholder.com", "role": "Airport Manager"},
-    {"id": 16, "name": "Resident 16", "address": "1256 Nieuport Dr",  "phone": "(772) 555-0116", "email": "resident16@placeholder.com", "role": "Director"},
-    {"id": 17, "name": "Resident 17", "address": "113 Albatross Dr",  "phone": "(772) 555-0117", "email": "resident17@placeholder.com", "role": "Director"}
+    {
+      "id": 1,
+      "name": "Carole Ballough",
+      "email": "cballough@gmail.com",
+      "role": "Treasurer"
+    },
+    {
+      "id": 2,
+      "name": "Nancy Barnhouse",
+      "email": "nancygb@fastmail.fm"
+    },
+    {
+      "id": 3,
+      "name": "Aaron Bowles",
+      "email": "bowleseng@gmail.com"
+    },
+    {
+      "id": 4,
+      "name": "Tasha Bowles",
+      "email": "tashieb72@gmail.com"
+    },
+    {
+      "id": 5,
+      "name": "Dave & Merana Cadorette",
+      "email": "d_cadorette@hotmail.com"
+    },
+    {
+      "id": 6,
+      "name": "Nancy Catalano",
+      "email": "nancy.catalano62@yahoo.com"
+    },
+    {
+      "id": 7,
+      "name": "Tim Chumley",
+      "email": "TChum10361@aol.com"
+    },
+    {
+      "id": 8,
+      "name": "David Colston",
+      "email": "davecolston@comcast.net"
+    },
+    {
+      "id": 9,
+      "name": "Michael Conway",
+      "email": "mike.conway@royalfundmanagement.com",
+      "role": "Vice President"
+    },
+    {
+      "id": 10,
+      "name": "Valerie Conway",
+      "email": "vconway@gmail.com"
+    },
+    {
+      "id": 11,
+      "name": "Robert (Bob) Cullin",
+      "email": "keylargocanvas@aol.com"
+    },
+    {
+      "id": 12,
+      "name": "Jim Davis",
+      "email": "jameskdavis@bellsouth.net"
+    },
+    {
+      "id": 13,
+      "name": "Patty Davis",
+      "email": "pattydavis@bellsouth.net"
+    },
+    {
+      "id": 14,
+      "name": "Lee & Lola Dee",
+      "email": "lolaleedee@yahoo.com"
+    },
+    {
+      "id": 15,
+      "name": "Leighann Degennaro",
+      "email": "leighdeg99@yahoo.com"
+    },
+    {
+      "id": 16,
+      "name": "Rob Denton",
+      "email": "rob3denton@gmail.com"
+    },
+    {
+      "id": 17,
+      "name": "Kim Dyson",
+      "email": "dysons4u@bellsouth.net"
+    },
+    {
+      "id": 18,
+      "name": "Ray Dyson",
+      "email": "redyson50@yahoo.com",
+      "role": "Airport Manager"
+    },
+    {
+      "id": 19,
+      "name": "Nick Easterling",
+      "email": "nickeast@aol.com",
+      "role": "President"
+    },
+    {
+      "id": 20,
+      "name": "Cass Emanual",
+      "email": "cass9832@gmail.com"
+    },
+    {
+      "id": 21,
+      "name": "Amanda Emanuel",
+      "email": "AmandaFL4654@hotmail.com"
+    },
+    {
+      "id": 22,
+      "name": "Rex De endall",
+      "email": "rex8974@gmail.com"
+    },
+    {
+      "id": 23,
+      "name": "George Ferguson",
+      "email": "gwfergy43@att.net"
+    },
+    {
+      "id": 24,
+      "name": "Stephen and Antonia Fisher",
+      "email": "Fisher3060@bellsouth.net"
+    },
+    {
+      "id": 25,
+      "name": "Gwen Garner",
+      "email": "gwengarner@msn.com"
+    },
+    {
+      "id": 26,
+      "name": "Kim Greenwood",
+      "email": "greenwood1996@aol.com"
+    },
+    {
+      "id": 27,
+      "name": "Brian Hayes",
+      "email": "brian@hayesgroupinc.com",
+      "role": "Director"
+    },
+    {
+      "id": 28,
+      "name": "Fannie Hipe",
+      "email": "fanniehipe@gmail.com"
+    },
+    {
+      "id": 29,
+      "name": "Gary Hodge",
+      "email": "senacirruh300@yahoo.com"
+    },
+    {
+      "id": 30,
+      "name": "Karen Hodge",
+      "email": "HodgeFamily226@gmail.com"
+    },
+    {
+      "id": 31,
+      "name": "Chris Ibarra",
+      "email": "cibarrarivera@yahoo.com"
+    },
+    {
+      "id": 32,
+      "name": "Joan Kaser",
+      "email": "Kaserjoan@gmail.com"
+    },
+    {
+      "id": 33,
+      "name": "Sue Kaser",
+      "email": "suekaser@gmail.com"
+    },
+    {
+      "id": 34,
+      "name": "Gloria Kurusis",
+      "email": "gloria888@aol.com"
+    },
+    {
+      "id": 35,
+      "name": "Michael Leighton",
+      "email": "ymkleighton@gmail.com"
+    },
+    {
+      "id": 36,
+      "name": "Mike Lewis",
+      "email": "mik23en@gmail.com"
+    },
+    {
+      "id": 37,
+      "name": "Shannon Lewis",
+      "email": "shan23non@yahoo.com"
+    },
+    {
+      "id": 38,
+      "name": "Dave von Linsowe",
+      "email": "dave77t@bellsouth.net"
+    },
+    {
+      "id": 39,
+      "name": "Trudy von Linsowe",
+      "email": "Trudyvon@bellsouth.net"
+    },
+    {
+      "id": 40,
+      "name": "John Mariani",
+      "email": "mariani@digital.net"
+    },
+    {
+      "id": 41,
+      "name": "Louisa Mariani",
+      "email": "louisamariani1@yahoo.com"
+    },
+    {
+      "id": 42,
+      "name": "Carl Miller",
+      "email": "carl.miller@bellsouth.net"
+    },
+    {
+      "id": 43,
+      "name": "Donna Miller",
+      "email": "deltamike@bellsouth.net"
+    },
+    {
+      "id": 44,
+      "name": "Michael & Ximena Moucheboeuf",
+      "email": "xtovar@hotmail.com"
+    },
+    {
+      "id": 45,
+      "name": "Gwen Myres",
+      "email": "ghmyres@gmail.com"
+    },
+    {
+      "id": 46,
+      "name": "Geo Newcombe",
+      "email": "gnewc@bellsouth.net"
+    },
+    {
+      "id": 47,
+      "name": "Joshua Pageau",
+      "email": "joshuapageau@gmail.com",
+      "role": "Secretary"
+    },
+    {
+      "id": 48,
+      "name": "Ann Peterson",
+      "email": "polycarpo4@gmail.com"
+    },
+    {
+      "id": 49,
+      "name": "Juliann Petticrew",
+      "email": "Classiccocktails@aol.com"
+    },
+    {
+      "id": 50,
+      "name": "Rocky Pinner",
+      "email": "Rochellepinner@gmail.com"
+    },
+    {
+      "id": 51,
+      "name": "Roy Pinner",
+      "email": "roypinner@gmail.com"
+    },
+    {
+      "id": 52,
+      "name": "Natalie Roscioli",
+      "email": "natalia.roscioli@gmail.com"
+    },
+    {
+      "id": 53,
+      "name": "Lamberto Roscioli",
+      "email": "lamberto_r@yahoo.com",
+      "role": "Director"
+    },
+    {
+      "id": 54,
+      "name": "John Schumann",
+      "email": "jjsauto@AOL.com"
+    },
+    {
+      "id": 55,
+      "name": "Donna Scott",
+      "email": "dscott8997@aol.com"
+    },
+    {
+      "id": 56,
+      "name": "Lucia Sousa",
+      "email": "luciacrsousa@gmail.com"
+    },
+    {
+      "id": 57,
+      "name": "Albert Spanioli",
+      "email": "thealspan@hotmail.com"
+    },
+    {
+      "id": 58,
+      "name": "Mike Spanos",
+      "email": "mike85233@gmail.com"
+    },
+    {
+      "id": 59,
+      "name": "Barbara Speece",
+      "email": "trailcruizer@gmail.com"
+    },
+    {
+      "id": 60,
+      "name": "Ryan Speece",
+      "email": "av8or320@gmail.com"
+    },
+    {
+      "id": 61,
+      "name": "Sherri Sproch",
+      "email": "BernzS@aol.com"
+    },
+    {
+      "id": 62,
+      "name": "Mike Stimac",
+      "email": "n333ms@gmail.com"
+    },
+    {
+      "id": 63,
+      "name": "Bernd Stroeter",
+      "email": "bstroeter@gmail.com"
+    },
+    {
+      "id": 64,
+      "name": "Winnie & Roy Thompson",
+      "email": "wthompson42@gmail.com"
+    },
+    {
+      "id": 65,
+      "name": "Eric Trax",
+      "email": "etrax58@gmail.com"
+    },
+    {
+      "id": 66,
+      "name": "Liz Trax",
+      "email": "lizztrax@gmail.com"
+    },
+    {
+      "id": 67,
+      "name": "Mark White",
+      "email": "sopwith220@gmail.com"
+    },
+    {
+      "id": 68,
+      "name": "Helene Wolfenden",
+      "email": "helenewolfenden@hotmail.com"
+    },
+    {
+      "id": 69,
+      "name": "Ian Wolfenden",
+      "email": "ianwolfenden@hotmail.com"
+    },
+    {
+      "id": 70,
+      "name": "Mary Wood",
+      "email": "sopwithmary@gmail.com"
+    },
+    {
+      "id": 71,
+      "name": "Deborah Young",
+      "email": "jadetree77@gmail.com"
+    },
+    {
+      "id": 72,
+      "name": "Peter Zavack",
+      "email": "PTZ626@aol.com"
+    },
+    {
+      "id": 73,
+      "name": "Bill Zorc",
+      "email": "zorc130@aol.com"
+    },
+    {
+      "id": 74,
+      "name": "Ashlee Zotter",
+      "email": "AshleeZotter@gmail.com"
+    },
+    {
+      "id": 75,
+      "name": "Brandon Zotter",
+      "email": "BrandonZotter@gmail.com"
+    }
   ]
 }
