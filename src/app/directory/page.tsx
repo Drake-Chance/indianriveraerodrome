@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useRef, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import directoryData from '@/data/directory.json';
 
 const PASSWORD = 'iraopa2026';
@@ -8,8 +8,6 @@ const PASSWORD = 'iraopa2026';
 type Resident = {
   id: number;
   name: string;
-  address: string;
-  phone: string;
   email: string;
   role?: string;
 };
@@ -19,15 +17,6 @@ export default function DirectoryPage() {
   const [error, setError] = useState('');
   const [authenticated, setAuthenticated] = useState(false);
   const [search, setSearch] = useState('');
-  const [images, setImages] = useState<string[]>([]);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const stored = localStorage.getItem('irapoa_gallery');
-    if (stored) {
-      try { setImages(JSON.parse(stored)); } catch { /* ignore */ }
-    }
-  }, []);
 
   const residents: Resident[] = directoryData.residents;
 
@@ -42,32 +31,12 @@ export default function DirectoryPage() {
     }
   }
 
-  function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      const base64 = ev.target?.result as string;
-      const updated = [...images, base64];
-      setImages(updated);
-      localStorage.setItem('irapoa_gallery', JSON.stringify(updated));
-    };
-    reader.readAsDataURL(file);
-    e.target.value = '';
-  }
-
-  function handleDeleteImage(idx: number) {
-    const updated = images.filter((_, i) => i !== idx);
-    setImages(updated);
-    localStorage.setItem('irapoa_gallery', JSON.stringify(updated));
-  }
-
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim();
     if (!q) return residents;
     return residents.filter(r =>
       r.name.toLowerCase().includes(q) ||
-      r.address.toLowerCase().includes(q) ||
+      r.email.toLowerCase().includes(q) ||
       (r.role ?? '').toLowerCase().includes(q)
     );
   }, [search, residents]);
@@ -143,8 +112,8 @@ export default function DirectoryPage() {
               </div>
             </div>
           ) : (
-            <div className="space-y-10">
-              {/* Search + upload + logout row */}
+            <div className="space-y-6">
+              {/* Search + logout row */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="relative max-w-sm w-full">
                   <svg
@@ -155,7 +124,7 @@ export default function DirectoryPage() {
                   </svg>
                   <input
                     type="text"
-                    placeholder="Search by name, address, role..."
+                    placeholder="Search by name, email, or role..."
                     value={search}
                     onChange={e => setSearch(e.target.value)}
                     className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent bg-white"
@@ -166,23 +135,6 @@ export default function DirectoryPage() {
                     {filtered.length} of {residents.length} residents
                   </span>
                   <button
-                    onClick={() => fileInputRef.current?.click()}
-                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-white text-sm font-medium transition-opacity hover:opacity-90"
-                    style={{ backgroundColor: '#4A90D9' }}
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    Upload Photo
-                  </button>
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={handleImageUpload}
-                  />
-                  <button
                     onClick={() => setAuthenticated(false)}
                     className="text-xs text-gray-400 hover:text-gray-600 underline transition-colors"
                   >
@@ -191,36 +143,12 @@ export default function DirectoryPage() {
                 </div>
               </div>
 
-              {/* Photo Gallery */}
-              {images.length > 0 && (
-                <div>
-                  <h2 className="text-lg font-bold text-gray-900 mb-4">Community Photos</h2>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                    {images.map((src, idx) => (
-                      <div key={idx} className="relative group rounded-xl overflow-hidden aspect-square bg-gray-100">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={src} alt={`Community photo ${idx + 1}`} className="w-full h-full object-cover" />
-                        <button
-                          onClick={() => handleDeleteImage(idx)}
-                          className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                          title="Remove photo"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                          </svg>
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
               {/* Desktop Table */}
               <div className="hidden md:block bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <table className="min-w-full divide-y divide-gray-100">
                   <thead style={{ backgroundColor: '#1B3A5C' }}>
                     <tr>
-                      {['Name / Role', 'Address', 'Phone', 'Email'].map(h => (
+                      {['Name', 'Email', 'Role'].map(h => (
                         <th
                           key={h}
                           className="px-5 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-blue-200"
@@ -232,24 +160,11 @@ export default function DirectoryPage() {
                   </thead>
                   <tbody className="divide-y divide-gray-50">
                     {filtered.map(r => (
-                      <tr key={r.id} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-5 py-4">
-                          <p className="text-sm font-semibold text-gray-900">{r.name}</p>
-                          {r.role && (
-                            <span
-                              className="inline-block mt-0.5 px-2 py-0.5 rounded-full text-xs font-medium text-white"
-                              style={{ backgroundColor: '#4A90D9' }}
-                            >
-                              {r.role}
-                            </span>
-                          )}
-                        </td>
-                        <td className="px-5 py-4 text-sm text-gray-600">{r.address}</td>
-                        <td className="px-5 py-4">
-                          <a href={`tel:${r.phone}`} className="text-sm text-gray-600 hover:underline">
-                            {r.phone}
-                          </a>
-                        </td>
+                      <tr
+                        key={r.id}
+                        className={`transition-colors ${r.role ? 'bg-blue-50/40 hover:bg-blue-50' : 'hover:bg-gray-50'}`}
+                      >
+                        <td className="px-5 py-4 text-sm font-semibold text-gray-900">{r.name}</td>
                         <td className="px-5 py-4">
                           <a
                             href={`mailto:${r.email}`}
@@ -258,6 +173,16 @@ export default function DirectoryPage() {
                           >
                             {r.email}
                           </a>
+                        </td>
+                        <td className="px-5 py-4">
+                          {r.role && (
+                            <span
+                              className="inline-block px-2.5 py-0.5 rounded-full text-xs font-medium text-white"
+                              style={{ backgroundColor: '#1B3A5C' }}
+                            >
+                              {r.role}
+                            </span>
+                          )}
                         </td>
                       </tr>
                     ))}
@@ -269,25 +194,26 @@ export default function DirectoryPage() {
               </div>
 
               {/* Mobile Cards */}
-              <div className="md:hidden space-y-4">
+              <div className="md:hidden space-y-3">
                 {filtered.map(r => (
-                  <div key={r.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
-                    <div className="mb-3">
+                  <div
+                    key={r.id}
+                    className={`bg-white rounded-2xl shadow-sm border p-5 ${r.role ? 'border-blue-200' : 'border-gray-100'}`}
+                  >
+                    <div className="flex items-start justify-between gap-3 mb-2">
                       <p className="font-semibold text-gray-900">{r.name}</p>
                       {r.role && (
                         <span
-                          className="inline-block mt-0.5 px-2 py-0.5 rounded-full text-xs font-medium text-white"
-                          style={{ backgroundColor: '#4A90D9' }}
+                          className="shrink-0 px-2.5 py-0.5 rounded-full text-xs font-medium text-white"
+                          style={{ backgroundColor: '#1B3A5C' }}
                         >
                           {r.role}
                         </span>
                       )}
                     </div>
-                    <div className="space-y-1.5 text-sm text-gray-600">
-                      <p>{r.address}</p>
-                      <a href={`tel:${r.phone}`} className="block hover:underline">{r.phone}</a>
-                      <a href={`mailto:${r.email}`} className="block hover:underline" style={{ color: '#4A90D9' }}>{r.email}</a>
-                    </div>
+                    <a href={`mailto:${r.email}`} className="text-sm hover:underline" style={{ color: '#4A90D9' }}>
+                      {r.email}
+                    </a>
                   </div>
                 ))}
                 {filtered.length === 0 && (
