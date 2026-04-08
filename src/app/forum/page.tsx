@@ -13,6 +13,7 @@ type Post = {
   author: string;
   content: string;
   timestamp: string;
+  reactions?: { thumbsUp: string[]; thumbsDown: string[] };
 };
 
 type Topic = {
@@ -226,6 +227,28 @@ export default function ForumPage() {
 
   function deletePost(id: string) {
     updateData({ ...data, posts: data.posts.filter(p => p.id !== id) });
+  }
+
+  function toggleReaction(postId: string, type: 'thumbsUp' | 'thumbsDown') {
+    updateData({
+      ...data,
+      posts: data.posts.map(p => {
+        if (p.id !== postId) return p;
+        const reactions = p.reactions || { thumbsUp: [], thumbsDown: [] };
+        const opposite = type === 'thumbsUp' ? 'thumbsDown' : 'thumbsUp';
+        const alreadyReacted = reactions[type].includes(userName);
+        return {
+          ...p,
+          reactions: {
+            ...reactions,
+            [type]: alreadyReacted
+              ? reactions[type].filter((n: string) => n !== userName)
+              : [...reactions[type], userName],
+            [opposite]: reactions[opposite].filter((n: string) => n !== userName),
+          },
+        };
+      }),
+    });
   }
 
   const activeTopicData = activeTopic ? data.topics.find(t => t.id === activeTopic) : null;
@@ -558,6 +581,34 @@ export default function ForumPage() {
                       )}
                     </div>
                     <p className="text-gray-700 text-sm whitespace-pre-wrap">{post.content}</p>
+                    <div className="flex items-center gap-3 mt-3 pt-3 border-t border-gray-50">
+                      <button
+                        onClick={() => toggleReaction(post.id, 'thumbsUp')}
+                        className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
+                          (post.reactions?.thumbsUp || []).includes(userName)
+                            ? 'bg-green-100 text-green-700 border border-green-200'
+                            : 'bg-gray-50 text-gray-500 border border-gray-100 hover:bg-green-50 hover:text-green-600'
+                        }`}
+                      >
+                        <span>👍</span>
+                        {(post.reactions?.thumbsUp || []).length > 0 && (
+                          <span>{(post.reactions?.thumbsUp || []).length}</span>
+                        )}
+                      </button>
+                      <button
+                        onClick={() => toggleReaction(post.id, 'thumbsDown')}
+                        className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
+                          (post.reactions?.thumbsDown || []).includes(userName)
+                            ? 'bg-red-100 text-red-700 border border-red-200'
+                            : 'bg-gray-50 text-gray-500 border border-gray-100 hover:bg-red-50 hover:text-red-600'
+                        }`}
+                      >
+                        <span>👎</span>
+                        {(post.reactions?.thumbsDown || []).length > 0 && (
+                          <span>{(post.reactions?.thumbsDown || []).length}</span>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 ))
               )}
