@@ -1,386 +1,451 @@
 {
   "residents": [
     {
-      "id": 1,
-      "name": "Carole Ballough",
-      "email": "cballough@gmail.com",
-      "role": "Treasurer"
+      "lot": 1,
+      "name": "Ashlee & Brandon Zotter",
+      "address": "300 Nieuport Drive",
+      "phone": "(305) 783-6241",
+      "email": "brandonzotter@gmail.com",
+      "id": 1
     },
     {
-      "id": 2,
-      "name": "Nancy Barnhouse",
-      "email": "nancygb@fastmail.fm"
-    },
-    {
-      "id": 3,
-      "name": "Aaron Bowles",
-      "email": "bowleseng@gmail.com"
-    },
-    {
-      "id": 4,
-      "name": "Tasha Bowles",
-      "email": "tashieb72@gmail.com"
-    },
-    {
-      "id": 5,
-      "name": "Dave & Merana Cadorette",
-      "email": "d_cadorette@hotmail.com"
-    },
-    {
-      "id": 6,
-      "name": "Nancy Catalano",
-      "email": "nancy.catalano62@yahoo.com"
-    },
-    {
-      "id": 7,
-      "name": "Tim Chumley",
-      "email": "TChum10361@aol.com"
-    },
-    {
-      "id": 8,
-      "name": "David Colston",
-      "email": "davecolston@comcast.net"
-    },
-    {
-      "id": 9,
-      "name": "Michael Conway",
-      "email": "mike.conway@royalfundmanagement.com",
-      "role": "Vice President"
-    },
-    {
-      "id": 10,
-      "name": "Valerie Conway",
-      "email": "vconway@gmail.com"
-    },
-    {
-      "id": 11,
-      "name": "Robert (Bob) Cullin",
-      "email": "keylargocanvas@aol.com"
-    },
-    {
-      "id": 12,
-      "name": "Jim Davis",
-      "email": "jameskdavis@bellsouth.net"
-    },
-    {
-      "id": 13,
-      "name": "Patty Davis",
-      "email": "pattydavis@bellsouth.net"
-    },
-    {
-      "id": 14,
-      "name": "Lee & Lola Dee",
-      "email": "lolaleedee@yahoo.com"
-    },
-    {
-      "id": 15,
-      "name": "Leighann Degennaro",
-      "email": "leighdeg99@yahoo.com"
-    },
-    {
-      "id": 16,
-      "name": "Rob Denton",
-      "email": "rob3denton@gmail.com"
-    },
-    {
-      "id": 17,
-      "name": "Kim Dyson",
-      "email": "dysons4u@bellsouth.net"
-    },
-    {
-      "id": 18,
-      "name": "Ray Dyson",
-      "email": "redyson50@yahoo.com",
-      "role": "Airport Manager"
-    },
-    {
-      "id": 19,
-      "name": "Nick Easterling",
-      "email": "nickeast@aol.com",
-      "role": "President"
-    },
-    {
-      "id": 20,
-      "name": "Cass Emanual",
-      "email": "cass9832@gmail.com"
-    },
-    {
-      "id": 21,
-      "name": "Amanda Emanuel",
-      "email": "AmandaFL4654@hotmail.com"
-    },
-    {
-      "id": 22,
-      "name": "Rex De endall",
-      "email": "rex8974@gmail.com"
-    },
-    {
-      "id": 23,
-      "name": "George Ferguson",
-      "email": "gwfergy43@att.net"
-    },
-    {
-      "id": 24,
-      "name": "Stephen and Antonia Fisher",
-      "email": "Fisher3060@bellsouth.net"
-    },
-    {
-      "id": 25,
-      "name": "Gwen Garner",
-      "email": "gwengarner@msn.com"
-    },
-    {
-      "id": 26,
-      "name": "Kim Greenwood",
-      "email": "greenwood1996@aol.com"
-    },
-    {
-      "id": 27,
-      "name": "Brian Hayes",
-      "email": "brian@hayesgroupinc.com",
-      "role": "Director"
-    },
-    {
-      "id": 28,
-      "name": "Fannie Hipe",
-      "email": "fanniehipe@gmail.com"
-    },
-    {
-      "id": 29,
-      "name": "Gary Hodge",
-      "email": "senacirruh300@yahoo.com"
-    },
-    {
-      "id": 30,
-      "name": "Karen Hodge",
-      "email": "HodgeFamily226@gmail.com"
-    },
-    {
-      "id": 31,
-      "name": "Chris Ibarra",
-      "email": "cibarrarivera@yahoo.com"
-    },
-    {
-      "id": 32,
-      "name": "Joan Kaser",
-      "email": "Kaserjoan@gmail.com"
-    },
-    {
-      "id": 33,
-      "name": "Sue Kaser",
-      "email": "suekaser@gmail.com"
-    },
-    {
-      "id": 34,
-      "name": "Gloria Kurusis",
-      "email": "gloria888@aol.com"
-    },
-    {
-      "id": 35,
-      "name": "Michael Leighton",
-      "email": "ymkleighton@gmail.com"
-    },
-    {
-      "id": 36,
-      "name": "Mike Lewis",
-      "email": "mik23en@gmail.com"
-    },
-    {
-      "id": 37,
-      "name": "Shannon Lewis",
-      "email": "shan23non@yahoo.com"
-    },
-    {
-      "id": 38,
-      "name": "Dave von Linsowe",
-      "email": "dave77t@bellsouth.net"
-    },
-    {
-      "id": 39,
-      "name": "Trudy von Linsowe",
-      "email": "Trudyvon@bellsouth.net"
-    },
-    {
-      "id": 40,
-      "name": "John Mariani",
-      "email": "mariani@digital.net"
-    },
-    {
-      "id": 41,
-      "name": "Louisa Mariani",
-      "email": "louisamariani1@yahoo.com"
-    },
-    {
-      "id": 42,
-      "name": "Carl Miller",
-      "email": "carl.miller@bellsouth.net"
-    },
-    {
-      "id": 43,
-      "name": "Donna Miller",
-      "email": "deltamike@bellsouth.net"
-    },
-    {
-      "id": 44,
+      "lot": 2,
       "name": "Michael & Ximena Moucheboeuf",
-      "email": "xtovar@hotmail.com"
+      "address": "290 Nieuport Drive",
+      "phone": "(954) 798-1123",
+      "email": "xtovar@hotmail.com",
+      "id": 2
     },
     {
-      "id": 45,
-      "name": "Gwen Myres",
-      "email": "ghmyres@gmail.com"
+      "lot": 3,
+      "name": "Sean Verne & Kim Conti",
+      "address": "280 Nieuport Drive",
+      "phone": "(772) 567-2941",
+      "email": "pawprints@bellsouth.net",
+      "id": 3
     },
     {
-      "id": 46,
-      "name": "Geo Newcombe",
-      "email": "gnewc@bellsouth.net"
+      "lot": 4,
+      "name": "Jim & Patty Davis",
+      "address": "270 Nieuport Drive",
+      "phone": "(772) 562-5825",
+      "email": "jameskdavis@bellsouth.net",
+      "id": 4
     },
     {
-      "id": 47,
-      "name": "Joshua Pageau",
-      "email": "joshuapageau@gmail.com",
-      "role": "Secretary"
-    },
-    {
-      "id": 48,
-      "name": "Ann Peterson",
-      "email": "polycarpo4@gmail.com"
-    },
-    {
-      "id": 49,
-      "name": "Juliann Petticrew",
-      "email": "Classiccocktails@aol.com"
-    },
-    {
-      "id": 50,
-      "name": "Rocky Pinner",
-      "email": "Rochellepinner@gmail.com"
-    },
-    {
-      "id": 51,
-      "name": "Roy Pinner",
-      "email": "roypinner@gmail.com"
-    },
-    {
-      "id": 52,
-      "name": "Natalie Roscioli",
-      "email": "natalia.roscioli@gmail.com"
-    },
-    {
-      "id": 53,
-      "name": "Lamberto Roscioli",
-      "email": "lamberto_r@yahoo.com",
-      "role": "Director"
-    },
-    {
-      "id": 54,
-      "name": "John Schumann",
-      "email": "jjsauto@AOL.com"
-    },
-    {
-      "id": 55,
-      "name": "Donna Scott",
-      "email": "dscott8997@aol.com"
-    },
-    {
-      "id": 56,
-      "name": "Lucia Sousa",
-      "email": "luciacrsousa@gmail.com"
-    },
-    {
-      "id": 57,
+      "lot": 5,
       "name": "Albert Spanioli",
-      "email": "thealspan@hotmail.com"
+      "address": "260 Nieuport Drive",
+      "phone": "(772) 563-3902",
+      "email": "thealspan@hotmail.com",
+      "id": 5
     },
     {
-      "id": 58,
-      "name": "Mike Spanos",
-      "email": "mike85233@gmail.com"
+      "lot": 6,
+      "name": "Ann Peterson & Steve Polycarpo",
+      "address": "250 Nieuport Drive",
+      "phone": "(863) 419-5926",
+      "email": "polycarpo4@gmail.com",
+      "id": 6
     },
     {
-      "id": 59,
-      "name": "Barbara Speece",
-      "email": "trailcruizer@gmail.com"
+      "lot": 7,
+      "name": "John & Luisa Mariani",
+      "address": "240 Spad Spur Drive",
+      "phone": "(772) 713-4367",
+      "email": "mariani@digital.net",
+      "id": 7
     },
     {
-      "id": 60,
-      "name": "Ryan Speece",
-      "email": "av8or320@gmail.com"
+      "lot": 8,
+      "name": "Cass & Amanda Emanuel",
+      "address": "230 Spad Spur Drive",
+      "phone": "(772) 473-9832",
+      "email": "cass9832@gmail.com",
+      "id": 8
     },
     {
-      "id": 61,
-      "name": "Sherri Sproch",
-      "email": "BernzS@aol.com"
+      "lot": 9,
+      "name": "Roy & Winnie Thompson",
+      "address": "100 Nieuport Drive",
+      "phone": "(772) 567-7164",
+      "email": "wthompson42@gmail.com",
+      "id": 9
     },
     {
-      "id": 62,
-      "name": "Mike Stimac",
-      "email": "n333ms@gmail.com"
+      "lot": 10,
+      "name": "Joan Kaser",
+      "address": "125 Nieuport Drive",
+      "phone": "(772) 562-5809",
+      "email": "kaserjoan@gmail.com",
+      "id": 10
     },
     {
-      "id": 63,
-      "name": "Bernd Stroeter",
-      "email": "bstroeter@gmail.com"
+      "lot": 11,
+      "name": "Mike & Shannon Lewis",
+      "address": "245 Nieuport Drive",
+      "phone": "(303) 263-9966",
+      "email": "mik23en@gmail.com",
+      "id": 11
     },
     {
-      "id": 64,
-      "name": "Winnie & Roy Thompson",
-      "email": "wthompson42@gmail.com"
+      "lot": 12,
+      "name": "Lee & Lola Dee",
+      "address": "255 Nieuport Drive",
+      "phone": "(772) 584-0524",
+      "email": "lolaleedee@yahoo.com",
+      "id": 12
     },
     {
-      "id": 65,
-      "name": "Eric Trax",
-      "email": "etrax58@gmail.com"
+      "lot": 13,
+      "name": "Gwen Myres",
+      "address": "265 Nieuport Drive",
+      "phone": "(786) 351-8099",
+      "email": "ghmyres@gmail.com",
+      "id": 13
     },
     {
-      "id": 66,
-      "name": "Liz Trax",
-      "email": "lizztrax@gmail.com"
+      "lot": 14,
+      "name": "Aaron & Tasha Bowles",
+      "address": "275 Nieuport Drive",
+      "phone": "(772) 696-5275",
+      "email": "bowleseng@gmail.com",
+      "id": 14
     },
     {
-      "id": 67,
-      "name": "Mark White",
-      "email": "sopwith220@gmail.com"
+      "lot": 15,
+      "name": "Fannie Hipe",
+      "address": "345 Nieuport Drive",
+      "phone": "(772) 778-3485",
+      "email": "fanniehipe@gmail.com",
+      "id": 15
     },
     {
-      "id": 68,
-      "name": "Helene Wolfenden",
-      "email": "helenewolfenden@hotmail.com"
+      "lot": 16,
+      "name": "Donna Scott",
+      "address": "365 Nieuport Drive",
+      "phone": "(772) 633-2261",
+      "email": "dscott8997@aol.com",
+      "id": 16
     },
     {
-      "id": 69,
-      "name": "Ian Wolfenden",
-      "email": "ianwolfenden@hotmail.com"
+      "lot": 17,
+      "name": "Roy & Rocky Pinner",
+      "address": "385 Nieuport Drive",
+      "phone": "(772) 473-7700",
+      "email": "roypinner@gmail.com",
+      "id": 17
     },
     {
-      "id": 70,
-      "name": "Mary Wood",
-      "email": "sopwithmary@gmail.com"
+      "lot": 18,
+      "name": "Juliann Petticrew",
+      "address": "395 Nieuport Drive",
+      "phone": "(772) 528-7095",
+      "email": "classiccocktails@aol.com",
+      "id": 18
     },
     {
-      "id": 71,
+      "lot": 19,
+      "name": "Joshua Pageau & Leighann Degennaro",
+      "address": "465 Nieuport Drive",
+      "phone": "(541) 631-1274",
+      "email": "joshuapageau@gmail.com",
+      "role": "Secretary",
+      "id": 19
+    },
+    {
+      "lot": 20,
+      "name": "Carole Ballough",
+      "address": "475 Nieuport Drive",
+      "phone": "(772) 633-0928",
+      "email": "cballough@gmail.com",
+      "role": "Treasurer",
+      "id": 20
+    },
+    {
+      "lot": 21,
+      "name": "Nick Easterling",
+      "address": "485 Nieuport Drive",
+      "phone": "(601) 689-0481",
+      "email": "nickeast@aol.com",
+      "role": "President",
+      "id": 21
+    },
+    {
+      "lot": 22,
+      "name": "Eric & Liz Trax",
+      "address": "495 Nieuport Drive",
+      "phone": "(772) 562-5680",
+      "email": "etrax58@gmail.com",
+      "id": 22
+    },
+    {
+      "lot": 24,
+      "name": "Gary & Karen Hodge / Peter Zavack",
+      "address": "440 Sopwith Drive",
+      "phone": "(772) 643-5099",
+      "email": "hodgefamily226@gmail.com",
+      "id": 23
+    },
+    {
+      "lot": 25,
+      "name": "Michael & Valerie Conway",
+      "address": "420 Sopwith Drive",
+      "phone": "(772) 480-4110",
+      "email": "mike.conway@royalfundmanagement.com",
+      "role": "Vice President",
+      "id": 24
+    },
+    {
+      "lot": 26,
       "name": "Deborah Young",
-      "email": "jadetree77@gmail.com"
+      "address": "400 Sopwith Drive",
+      "phone": "(772) 562-9524",
+      "email": "jadetree77@gmail.com",
+      "id": 25
     },
     {
-      "id": 72,
-      "name": "Peter Zavack",
-      "email": "PTZ626@aol.com"
+      "lot": 27,
+      "name": "Rex Deffendall",
+      "address": "8545 De Havilland Court",
+      "phone": "(772) 473-0956",
+      "email": "dixan@bellsouth.net",
+      "id": 26
     },
     {
-      "id": 73,
-      "name": "Bill Zorc",
-      "email": "zorc130@aol.com"
+      "lot": 28,
+      "name": "Ian & Helene Wolfenden",
+      "address": "8525 De Havilland Court",
+      "phone": "(772) 563-0774",
+      "email": "ianwolfenden@hotmail.com",
+      "id": 27
     },
     {
-      "id": 74,
-      "name": "Ashlee Zotter",
-      "email": "AshleeZotter@gmail.com"
+      "lot": 29,
+      "name": "Stephen & Antonia Fisher",
+      "address": "8515 De Havilland Court",
+      "phone": "(772) 532-5542",
+      "email": "fisher3060@bellsouth.net",
+      "id": 28
     },
     {
-      "id": 75,
-      "name": "Brandon Zotter",
-      "email": "BrandonZotter@gmail.com"
+      "lot": 30,
+      "name": "David & Nancy Catalano",
+      "address": "8520 De Havilland Court",
+      "phone": "(772) 473-6328",
+      "email": "nancy.catalano62@yahoo.com",
+      "id": 29
+    },
+    {
+      "lot": 31,
+      "name": "Nick Decker",
+      "address": "8540 De Havilland Court",
+      "phone": "(734) 612-8965",
+      "email": "nikola.decker@yahoo.com",
+      "id": 30
+    },
+    {
+      "lot": 32,
+      "name": "Chris Ibarra",
+      "address": "8560 De Havilland Court",
+      "phone": "(561) 445-0732",
+      "email": "cibarrarivera@yahoo.com",
+      "id": 31
+    },
+    {
+      "lot": 33,
+      "name": "David Gagliardi",
+      "address": "8525 Waco Way",
+      "phone": "(772) 913-1887",
+      "email": "",
+      "id": 32
+    },
+    {
+      "lot": 34,
+      "name": "Lamberto & Natalia Roscioli",
+      "address": "8515 Waco Way",
+      "phone": "(954) 868-1095",
+      "email": "lamberto_r@yahoo.com",
+      "role": "Director",
+      "id": 33
+    },
+    {
+      "lot": 35,
+      "name": "Gwen Garner",
+      "address": "8520 Waco Way",
+      "phone": "(772) 559-7885",
+      "email": "gwengarner@msn.com",
+      "id": 34
+    },
+    {
+      "lot": 36,
+      "name": "George & Catherine Ferguson",
+      "address": "240 Sopwith Drive",
+      "phone": "(954) 431-4768",
+      "email": "gwfergy43@att.net",
+      "id": 35
+    },
+    {
+      "lot": 37,
+      "name": "Mark & Mary White",
+      "address": "220 Sopwith Drive",
+      "phone": "(772) 538-3443",
+      "email": "sopwith220@gmail.com",
+      "id": 36
+    },
+    {
+      "lot": 38,
+      "name": "Dave & Trudy von Linsowe",
+      "address": "160 Sopwith Drive",
+      "phone": "(772) 563-3671",
+      "email": "dave77t@bellsouth.net",
+      "id": 37
+    },
+    {
+      "lot": 39,
+      "name": "Michael Leighton",
+      "address": "140 Sopwith Drive",
+      "phone": "(561) 704-2008",
+      "email": "flymkleighton@gmail.com",
+      "id": 38
+    },
+    {
+      "lot": 40,
+      "name": "Michael J. Stimac",
+      "address": "120 Sopwith Drive",
+      "phone": "(231) 929-0000",
+      "email": "n333ms@gmail.com",
+      "id": 39
+    },
+    {
+      "lot": 41,
+      "name": "Mike Spanos",
+      "address": "505 Wright Circle",
+      "phone": "(772) 800-8800",
+      "email": "mike85233@gmail.com",
+      "id": 40
+    },
+    {
+      "lot": 42,
+      "name": "Dave & Jessie Colston",
+      "address": "515 Wright Circle",
+      "phone": "(561) 719-3676",
+      "email": "davecolston@comcast.net",
+      "id": 41
+    },
+    {
+      "lot": 43,
+      "name": "Ryan & Barbara Speece",
+      "address": "510 Wright Circle",
+      "phone": "(734) 802-9696",
+      "email": "av8or320@gmail.com",
+      "id": 42
+    },
+    {
+      "lot": 44,
+      "name": "Dave & Merana Cadorette",
+      "address": "520 Wright Circle",
+      "phone": "(772) 766-5264",
+      "email": "d_cadorette@hotmail.com",
+      "id": 43
+    },
+    {
+      "lot": 45,
+      "name": "Rob Denton III & Kim Greenwood",
+      "address": "525 Wright Circle",
+      "phone": "(703) 774-8921",
+      "email": "rob3denton@gmail.com",
+      "id": 44
+    },
+    {
+      "lot": 46,
+      "name": "Bill & Connie Zorc",
+      "address": "505 Gull Wing Drive",
+      "phone": "(772) 569-5673",
+      "email": "zorc130@aol.com",
+      "id": 45
+    },
+    {
+      "lot": 47,
+      "name": "Tim Chumley",
+      "address": "525 Gull Wing Drive",
+      "phone": "(772) 971-5695",
+      "email": "tchum10361@aol.com",
+      "id": 46
+    },
+    {
+      "lot": 48,
+      "name": "Raymond & Kim Dyson",
+      "address": "535 Gull Wing Drive",
+      "phone": "(772) 696-1802",
+      "email": "redyson50@yahoo.com",
+      "role": "Airport Manager",
+      "id": 47
+    },
+    {
+      "lot": 49,
+      "name": "Carl & Donna Miller",
+      "address": "545 Gull Wing Drive",
+      "phone": "(772) 713-8001",
+      "email": "carl.miller@bellsouth.net",
+      "id": 48
+    },
+    {
+      "lot": 50,
+      "name": "Geoff & Jan Newcombe",
+      "address": "565 Gull Wing Drive",
+      "phone": "(772) 567-3833",
+      "email": "gnewc@bellsouth.net",
+      "id": 49
+    },
+    {
+      "lot": 51,
+      "name": "Brian Hayes",
+      "address": "585 Gull Wing Drive",
+      "phone": "(772) 226-0061",
+      "email": "brian@hayesgroupinc.com",
+      "role": "Director",
+      "id": 50
+    },
+    {
+      "lot": 52,
+      "name": "Gloria Kurusis",
+      "address": "540 Gull Wing Drive",
+      "phone": "(772) 633-3050",
+      "email": "gloria888@aol.com",
+      "id": 51
+    },
+    {
+      "lot": 53,
+      "name": "Bill & Sue Kaser",
+      "address": "560 Gull Wing Drive",
+      "phone": "(772) 473-3682",
+      "email": "suekaser@gmail.com",
+      "id": 52
+    },
+    {
+      "lot": 54,
+      "name": "Nancy Barnhouse",
+      "address": "580 Gull Wing Drive",
+      "phone": "(772) 567-6450",
+      "email": "nancygb@fastmail.fm",
+      "id": 53
+    },
+    {
+      "lot": 55,
+      "name": "Sherri Sproch",
+      "address": "8235 5th Street SW",
+      "phone": "(772) 713-1905",
+      "email": "bernzs@aol.com",
+      "id": 54
+    },
+    {
+      "lot": 56,
+      "name": "John & Kathi Schumann",
+      "address": "8225 5th Street SW",
+      "phone": "(772) 794-7510",
+      "email": "jjsauto@aol.com",
+      "id": 55
     }
   ]
 }

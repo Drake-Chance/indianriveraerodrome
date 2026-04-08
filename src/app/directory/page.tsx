@@ -8,13 +8,18 @@ const LS_KEY = 'irapoa_directory_edits';
 
 type Resident = {
   id: number;
+  lot: number;
   name: string;
+  address: string;
+  phone: string;
   email: string;
   role?: string;
 };
 
+type EditFields = { name: string; address: string; phone: string; email: string; role?: string };
+
 type StoredEdits = {
-  edits: Record<number, { name: string; email: string; role?: string }>;
+  edits: Record<number, EditFields>;
   additions: Resident[];
   deletions: number[];
 };
@@ -34,27 +39,27 @@ function saveEdits(data: StoredEdits) {
   localStorage.setItem(LS_KEY, JSON.stringify(data));
 }
 
+const emptyEditForm = { name: '', address: '', phone: '', email: '' };
+
 export default function DirectoryPage() {
   const [input, setInput] = useState('');
   const [error, setError] = useState('');
   const [authenticated, setAuthenticated] = useState(false);
   const [search, setSearch] = useState('');
 
-  // Editing state
   const [editingId, setEditingId] = useState<number | null>(null);
-  const [editForm, setEditForm] = useState({ name: '', email: '' });
+  const [editForm, setEditForm] = useState(emptyEditForm);
   const [showAddForm, setShowAddForm] = useState(false);
-  const [addForm, setAddForm] = useState({ name: '', email: '' });
+  const [addForm, setAddForm] = useState(emptyEditForm);
   const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
 
-  // localStorage overlay
   const [stored, setStored] = useState<StoredEdits>({ edits: {}, additions: [], deletions: [] });
 
   useEffect(() => {
     setStored(loadEdits());
   }, []);
 
-  const baseResidents: Resident[] = directoryData.residents;
+  const baseResidents: Resident[] = directoryData.residents as Resident[];
 
   const residents = useMemo<Resident[]>(() => {
     const deletionSet = new Set(stored.deletions);
@@ -73,6 +78,8 @@ export default function DirectoryPage() {
     return residents.filter(r =>
       r.name.toLowerCase().includes(q) ||
       r.email.toLowerCase().includes(q) ||
+      r.address.toLowerCase().includes(q) ||
+      r.phone.toLowerCase().includes(q) ||
       (r.role ?? '').toLowerCase().includes(q)
     );
   }, [search, residents]);
@@ -88,59 +95,55 @@ export default function DirectoryPage() {
     }
   }
 
-  // Edit
   function startEdit(r: Resident) {
     setEditingId(r.id);
-    setEditForm({ name: r.name, email: r.email });
+    setEditForm({ name: r.name, address: r.address, phone: r.phone, email: r.email });
     setShowAddForm(false);
     setDeleteConfirmId(null);
   }
 
   function saveEdit(id: number) {
-    const updated: StoredEdits = {
-      ...stored,
-      edits: {
-        ...stored.edits,
-        [id]: {
-          ...(stored.edits[id] ?? {}),
-          name: editForm.name.trim(),
-          email: editForm.email.trim(),
-        },
-      },
+    const fields: EditFields = {
+      name: editForm.name.trim(),
+      address: editForm.address.trim(),
+      phone: editForm.phone.trim(),
+      email: editForm.email.trim(),
     };
-    // If it's an addition, update in-place
     const isAddition = stored.additions.some(a => a.id === id);
+    let updated: StoredEdits;
     if (isAddition) {
-      updated.additions = stored.additions.map(a =>
-        a.id === id ? { ...a, name: editForm.name.trim(), email: editForm.email.trim() } : a
-      );
-      delete updated.edits[id];
+      updated = {
+        ...stored,
+        additions: stored.additions.map(a => a.id === id ? { ...a, ...fields } : a),
+      };
+    } else {
+      updated = {
+        ...stored,
+        edits: { ...stored.edits, [id]: { ...(stored.edits[id] ?? {}), ...fields } },
+      };
     }
     setStored(updated);
     saveEdits(updated);
     setEditingId(null);
   }
 
-  // Add
   function saveAdd() {
-    if (!addForm.name.trim() || !addForm.email.trim()) return;
-    const newId = Date.now();
+    if (!addForm.name.trim()) return;
     const newResident: Resident = {
-      id: newId,
+      id: Date.now(),
+      lot: 0,
       name: addForm.name.trim(),
+      address: addForm.address.trim(),
+      phone: addForm.phone.trim(),
       email: addForm.email.trim(),
     };
-    const updated: StoredEdits = {
-      ...stored,
-      additions: [...stored.additions, newResident],
-    };
+    const updated: StoredEdits = { ...stored, additions: [...stored.additions, newResident] };
     setStored(updated);
     saveEdits(updated);
-    setAddForm({ name: '', email: '' });
+    setAddForm(emptyEditForm);
     setShowAddForm(false);
   }
 
-  // Delete
   function confirmDelete(id: number) {
     const isAddition = stored.additions.some(a => a.id === id);
     let updated: StoredEdits;
@@ -149,11 +152,7 @@ export default function DirectoryPage() {
     } else {
       const newEdits = { ...stored.edits };
       delete newEdits[id];
-      updated = {
-        ...stored,
-        edits: newEdits,
-        deletions: [...stored.deletions, id],
-      };
+      updated = { ...stored, edits: newEdits, deletions: [...stored.deletions, id] };
     }
     setStored(updated);
     saveEdits(updated);
@@ -161,7 +160,6 @@ export default function DirectoryPage() {
     if (editingId === id) setEditingId(null);
   }
 
-  // Reset
   function resetToDefault() {
     const empty: StoredEdits = { edits: {}, additions: [], deletions: [] };
     setStored(empty);
@@ -259,7 +257,7 @@ export default function DirectoryPage() {
                   </svg>
                   <input
                     type="text"
-                    placeholder="Search by name, email, or role..."
+                    placeholder="Search by name, address, phone, or email..."
                     value={search}
                     onChange={e => setSearch(e.target.value)}
                     className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent bg-white"
@@ -297,165 +295,211 @@ export default function DirectoryPage() {
               {showAddForm && (
                 <div className="bg-white rounded-2xl shadow-sm border border-blue-100 p-5">
                   <h3 className="text-sm font-semibold text-gray-700 mb-4">New Resident</h3>
-                  <div className="flex flex-col sm:flex-row gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input
                       type="text"
-                      placeholder="Full name"
+                      placeholder="Full name *"
                       value={addForm.name}
                       onChange={e => setAddForm(f => ({ ...f, name: e.target.value }))}
-                      className="flex-1 px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent bg-white"
+                      className="px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent bg-white"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Street address"
+                      value={addForm.address}
+                      onChange={e => setAddForm(f => ({ ...f, address: e.target.value }))}
+                      className="px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent bg-white"
+                    />
+                    <input
+                      type="tel"
+                      placeholder="Phone number"
+                      value={addForm.phone}
+                      onChange={e => setAddForm(f => ({ ...f, phone: e.target.value }))}
+                      className="px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent bg-white"
                     />
                     <input
                       type="email"
                       placeholder="Email address"
                       value={addForm.email}
                       onChange={e => setAddForm(f => ({ ...f, email: e.target.value }))}
-                      className="flex-1 px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent bg-white"
+                      className="px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:border-transparent bg-white"
                     />
-                    <div className="flex gap-2">
-                      <button
-                        onClick={saveAdd}
-                        disabled={!addForm.name.trim() || !addForm.email.trim()}
-                        className="px-4 py-2 rounded-xl text-white text-sm font-semibold transition-opacity hover:opacity-90 disabled:opacity-40"
-                        style={{ backgroundColor: '#1B3A5C' }}
-                      >
-                        Save
-                      </button>
-                      <button
-                        onClick={() => { setShowAddForm(false); setAddForm({ name: '', email: '' }); }}
-                        className="px-4 py-2 rounded-xl text-sm font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
-                      >
-                        Cancel
-                      </button>
-                    </div>
+                  </div>
+                  <div className="flex gap-2 mt-3">
+                    <button
+                      onClick={saveAdd}
+                      disabled={!addForm.name.trim()}
+                      className="px-4 py-2 rounded-xl text-white text-sm font-semibold transition-opacity hover:opacity-90 disabled:opacity-40"
+                      style={{ backgroundColor: '#1B3A5C' }}
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={() => { setShowAddForm(false); setAddForm(emptyEditForm); }}
+                      className="px-4 py-2 rounded-xl text-sm font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
+                    >
+                      Cancel
+                    </button>
                   </div>
                 </div>
               )}
 
               {/* Desktop Table */}
               <div className="hidden md:block bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                <table className="min-w-full divide-y divide-gray-100">
-                  <thead style={{ backgroundColor: '#1B3A5C' }}>
-                    <tr>
-                      {['Name', 'Email', 'Role', ''].map((h, i) => (
-                        <th
-                          key={i}
-                          className="px-5 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-blue-200"
-                        >
-                          {h}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-50">
-                    {filtered.map(r => (
-                      <tr
-                        key={r.id}
-                        className={`transition-colors ${r.role ? 'bg-blue-50/40 hover:bg-blue-50' : 'hover:bg-gray-50'}`}
-                      >
-                        {editingId === r.id ? (
-                          <>
-                            <td className="px-5 py-3">
-                              <input
-                                type="text"
-                                value={editForm.name}
-                                onChange={e => setEditForm(f => ({ ...f, name: e.target.value }))}
-                                className="w-full px-3 py-1.5 border border-blue-200 rounded-lg text-sm focus:outline-none focus:ring-2 bg-white"
-                                autoFocus
-                              />
-                            </td>
-                            <td className="px-5 py-3">
-                              <input
-                                type="email"
-                                value={editForm.email}
-                                onChange={e => setEditForm(f => ({ ...f, email: e.target.value }))}
-                                className="w-full px-3 py-1.5 border border-blue-200 rounded-lg text-sm focus:outline-none focus:ring-2 bg-white"
-                              />
-                            </td>
-                            <td className="px-5 py-3">
-                              {r.role && (
-                                <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-medium text-white" style={{ backgroundColor: '#1B3A5C' }}>
-                                  {r.role}
-                                </span>
-                              )}
-                            </td>
-                            <td className="px-5 py-3">
-                              <div className="flex gap-2">
-                                <button
-                                  onClick={() => saveEdit(r.id)}
-                                  className="px-3 py-1 rounded-lg text-white text-xs font-semibold hover:opacity-90"
-                                  style={{ backgroundColor: '#1B3A5C' }}
-                                >
-                                  Save
-                                </button>
-                                <button
-                                  onClick={() => setEditingId(null)}
-                                  className="px-3 py-1 rounded-lg text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200"
-                                >
-                                  Cancel
-                                </button>
-                              </div>
-                            </td>
-                          </>
-                        ) : deleteConfirmId === r.id ? (
-                          <>
-                            <td colSpan={3} className="px-5 py-4 text-sm text-gray-700">
-                              Delete <span className="font-semibold">{r.name}</span>? This cannot be undone.
-                            </td>
-                            <td className="px-5 py-4">
-                              <div className="flex gap-2">
-                                <button
-                                  onClick={() => confirmDelete(r.id)}
-                                  className="px-3 py-1 rounded-lg text-white text-xs font-semibold bg-red-500 hover:bg-red-600"
-                                >
-                                  Delete
-                                </button>
-                                <button
-                                  onClick={() => setDeleteConfirmId(null)}
-                                  className="px-3 py-1 rounded-lg text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200"
-                                >
-                                  Cancel
-                                </button>
-                              </div>
-                            </td>
-                          </>
-                        ) : (
-                          <>
-                            <td className="px-5 py-4 text-sm font-semibold text-gray-900">{r.name}</td>
-                            <td className="px-5 py-4">
-                              <a href={`mailto:${r.email}`} className="text-sm hover:underline" style={{ color: '#4A90D9' }}>
-                                {r.email}
-                              </a>
-                            </td>
-                            <td className="px-5 py-4">
-                              {r.role && (
-                                <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-medium text-white" style={{ backgroundColor: '#1B3A5C' }}>
-                                  {r.role}
-                                </span>
-                              )}
-                            </td>
-                            <td className="px-5 py-4">
-                              <div className="flex gap-2">
-                                <button
-                                  onClick={() => startEdit(r)}
-                                  className="px-3 py-1 rounded-lg text-xs font-medium text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors"
-                                >
-                                  Edit
-                                </button>
-                                <button
-                                  onClick={() => { setDeleteConfirmId(r.id); setEditingId(null); }}
-                                  className="px-3 py-1 rounded-lg text-xs font-medium text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
-                                >
-                                  Delete
-                                </button>
-                              </div>
-                            </td>
-                          </>
-                        )}
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-100">
+                    <thead style={{ backgroundColor: '#1B3A5C' }}>
+                      <tr>
+                        {['Lot #', 'Name', 'Address', 'Phone', 'Email', 'Role', ''].map((h, i) => (
+                          <th
+                            key={i}
+                            className="px-4 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-blue-200 whitespace-nowrap"
+                          >
+                            {h}
+                          </th>
+                        ))}
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody className="divide-y divide-gray-50">
+                      {filtered.map(r => (
+                        <tr
+                          key={r.id}
+                          className={`transition-colors ${r.role ? 'bg-blue-50/40 hover:bg-blue-50' : 'hover:bg-gray-50'}`}
+                        >
+                          {editingId === r.id ? (
+                            <>
+                              <td className="px-4 py-3 text-sm text-gray-500">
+                                {r.lot > 0 ? r.lot : '—'}
+                              </td>
+                              <td className="px-4 py-3">
+                                <input
+                                  type="text"
+                                  value={editForm.name}
+                                  onChange={e => setEditForm(f => ({ ...f, name: e.target.value }))}
+                                  className="w-full min-w-[140px] px-3 py-1.5 border border-blue-200 rounded-lg text-sm focus:outline-none focus:ring-2 bg-white"
+                                  autoFocus
+                                />
+                              </td>
+                              <td className="px-4 py-3">
+                                <input
+                                  type="text"
+                                  value={editForm.address}
+                                  onChange={e => setEditForm(f => ({ ...f, address: e.target.value }))}
+                                  className="w-full min-w-[160px] px-3 py-1.5 border border-blue-200 rounded-lg text-sm focus:outline-none focus:ring-2 bg-white"
+                                />
+                              </td>
+                              <td className="px-4 py-3">
+                                <input
+                                  type="tel"
+                                  value={editForm.phone}
+                                  onChange={e => setEditForm(f => ({ ...f, phone: e.target.value }))}
+                                  className="w-full min-w-[120px] px-3 py-1.5 border border-blue-200 rounded-lg text-sm focus:outline-none focus:ring-2 bg-white"
+                                />
+                              </td>
+                              <td className="px-4 py-3">
+                                <input
+                                  type="email"
+                                  value={editForm.email}
+                                  onChange={e => setEditForm(f => ({ ...f, email: e.target.value }))}
+                                  className="w-full min-w-[160px] px-3 py-1.5 border border-blue-200 rounded-lg text-sm focus:outline-none focus:ring-2 bg-white"
+                                />
+                              </td>
+                              <td className="px-4 py-3">
+                                {r.role && (
+                                  <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-medium text-white" style={{ backgroundColor: '#1B3A5C' }}>
+                                    {r.role}
+                                  </span>
+                                )}
+                              </td>
+                              <td className="px-4 py-3">
+                                <div className="flex gap-2">
+                                  <button
+                                    onClick={() => saveEdit(r.id)}
+                                    className="px-3 py-1 rounded-lg text-white text-xs font-semibold hover:opacity-90"
+                                    style={{ backgroundColor: '#1B3A5C' }}
+                                  >
+                                    Save
+                                  </button>
+                                  <button
+                                    onClick={() => setEditingId(null)}
+                                    className="px-3 py-1 rounded-lg text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200"
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
+                              </td>
+                            </>
+                          ) : deleteConfirmId === r.id ? (
+                            <>
+                              <td colSpan={6} className="px-4 py-4 text-sm text-gray-700">
+                                Delete <span className="font-semibold">{r.name}</span>? This cannot be undone.
+                              </td>
+                              <td className="px-4 py-4">
+                                <div className="flex gap-2">
+                                  <button
+                                    onClick={() => confirmDelete(r.id)}
+                                    className="px-3 py-1 rounded-lg text-white text-xs font-semibold bg-red-500 hover:bg-red-600"
+                                  >
+                                    Delete
+                                  </button>
+                                  <button
+                                    onClick={() => setDeleteConfirmId(null)}
+                                    className="px-3 py-1 rounded-lg text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200"
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
+                              </td>
+                            </>
+                          ) : (
+                            <>
+                              <td className="px-4 py-4 text-sm text-gray-500 font-medium">
+                                {r.lot > 0 ? r.lot : '—'}
+                              </td>
+                              <td className="px-4 py-4 text-sm font-semibold text-gray-900 whitespace-nowrap">{r.name}</td>
+                              <td className="px-4 py-4 text-sm text-gray-600">{r.address}</td>
+                              <td className="px-4 py-4 text-sm text-gray-600 whitespace-nowrap">
+                                {r.phone ? (
+                                  <a href={`tel:${r.phone}`} className="hover:underline" style={{ color: '#4A90D9' }}>{r.phone}</a>
+                                ) : '—'}
+                              </td>
+                              <td className="px-4 py-4">
+                                {r.email ? (
+                                  <a href={`mailto:${r.email}`} className="text-sm hover:underline" style={{ color: '#4A90D9' }}>
+                                    {r.email}
+                                  </a>
+                                ) : <span className="text-gray-400 text-sm">—</span>}
+                              </td>
+                              <td className="px-4 py-4">
+                                {r.role && (
+                                  <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-medium text-white" style={{ backgroundColor: '#1B3A5C' }}>
+                                    {r.role}
+                                  </span>
+                                )}
+                              </td>
+                              <td className="px-4 py-4">
+                                <div className="flex gap-2">
+                                  <button
+                                    onClick={() => startEdit(r)}
+                                    className="px-3 py-1 rounded-lg text-xs font-medium text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+                                  >
+                                    Edit
+                                  </button>
+                                  <button
+                                    onClick={() => { setDeleteConfirmId(r.id); setEditingId(null); }}
+                                    className="px-3 py-1 rounded-lg text-xs font-medium text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
+                                  >
+                                    Delete
+                                  </button>
+                                </div>
+                              </td>
+                            </>
+                          )}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
                 {filtered.length === 0 && (
                   <div className="py-12 text-center text-gray-400 text-sm">No residents match your search.</div>
                 )}
@@ -477,6 +521,20 @@ export default function DirectoryPage() {
                           placeholder="Full name"
                           className="w-full px-3 py-2 border border-blue-200 rounded-xl text-sm focus:outline-none focus:ring-2 bg-white"
                           autoFocus
+                        />
+                        <input
+                          type="text"
+                          value={editForm.address}
+                          onChange={e => setEditForm(f => ({ ...f, address: e.target.value }))}
+                          placeholder="Street address"
+                          className="w-full px-3 py-2 border border-blue-200 rounded-xl text-sm focus:outline-none focus:ring-2 bg-white"
+                        />
+                        <input
+                          type="tel"
+                          value={editForm.phone}
+                          onChange={e => setEditForm(f => ({ ...f, phone: e.target.value }))}
+                          placeholder="Phone number"
+                          className="w-full px-3 py-2 border border-blue-200 rounded-xl text-sm focus:outline-none focus:ring-2 bg-white"
                         />
                         <input
                           type="email"
@@ -521,17 +579,34 @@ export default function DirectoryPage() {
                       </div>
                     ) : (
                       <>
-                        <div className="flex items-start justify-between gap-3 mb-2">
-                          <p className="font-semibold text-gray-900">{r.name}</p>
+                        <div className="flex items-start justify-between gap-3 mb-3">
+                          <div>
+                            <p className="font-semibold text-gray-900">{r.name}</p>
+                            {r.lot > 0 && (
+                              <p className="text-xs text-gray-400 mt-0.5">Lot {r.lot}</p>
+                            )}
+                          </div>
                           {r.role && (
                             <span className="shrink-0 px-2.5 py-0.5 rounded-full text-xs font-medium text-white" style={{ backgroundColor: '#1B3A5C' }}>
                               {r.role}
                             </span>
                           )}
                         </div>
-                        <a href={`mailto:${r.email}`} className="text-sm hover:underline" style={{ color: '#4A90D9' }}>
-                          {r.email}
-                        </a>
+                        <div className="space-y-1.5 text-sm">
+                          {r.address && (
+                            <p className="text-gray-600">{r.address}</p>
+                          )}
+                          {r.phone && (
+                            <a href={`tel:${r.phone}`} className="block hover:underline" style={{ color: '#4A90D9' }}>
+                              {r.phone}
+                            </a>
+                          )}
+                          {r.email && (
+                            <a href={`mailto:${r.email}`} className="block hover:underline" style={{ color: '#4A90D9' }}>
+                              {r.email}
+                            </a>
+                          )}
+                        </div>
                         <div className="flex gap-2 mt-3">
                           <button
                             onClick={() => startEdit(r)}
