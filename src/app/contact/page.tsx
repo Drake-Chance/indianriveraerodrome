@@ -122,7 +122,7 @@ export default function ContactPage() {
               <div className="rounded-2xl p-6 text-white" style={{ backgroundColor: '#4A90D9' }}>
                 <h3 className="font-bold mb-2">Board Meetings</h3>
                 <p className="text-sm text-blue-100 leading-relaxed">
-                  Board meetings are held on the 2nd Monday of each month at 6:00 PM.
+                  Board meetings are held on the 2nd Tuesday of each month at 6:00 PM.
                   Location is TBD — meetings rotate at board members&apos; homes.
                   Residents are welcome to attend.
                 </p>

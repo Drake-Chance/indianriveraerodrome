@@ -211,7 +211,7 @@ export default function MeetingsPage() {
               <ul className="space-y-3 text-sm">
                 <li>
                   <p className="text-blue-300 text-xs uppercase tracking-wide">Frequency</p>
-                  <p className="font-medium mt-0.5">Monthly (typically 2nd Monday)</p>
+                  <p className="font-medium mt-0.5">Monthly (typically 2nd Tuesday)</p>
                 </li>
                 <li>
                   <p className="text-blue-300 text-xs uppercase tracking-wide">Default Time</p>
