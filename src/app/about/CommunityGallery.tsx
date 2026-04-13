@@ -1,40 +1,47 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { isAuthenticated, authenticate, clearAuth } from '@/lib/auth';
 
-const STORAGE_KEY = 'irapoa_gallery_v2';
-
 type GalleryImage = {
-  id: string;
-  src: string;
+  url: string;
+  pathname: string;
   caption: string;
   uploadedAt: number;
 };
 
 export default function CommunityGallery() {
   const [images, setImages] = useState<GalleryImage[]>([]);
+  const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [input, setInput] = useState('');
   const [error, setError] = useState('');
   const [pendingCaption, setPendingCaption] = useState('');
-  const [pendingFile, setPendingFile] = useState<string | null>(null);
+  const [pendingFile, setPendingFile] = useState<File | null>(null);
+  const [pendingPreview, setPendingPreview] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [deleting, setDeleting] = useState<string | null>(null);
   const [lightbox, setLightbox] = useState<GalleryImage | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (isAuthenticated()) setAuthenticated(true);
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      try { setImages(JSON.parse(stored)); } catch { /* ignore */ }
+  const fetchImages = useCallback(async () => {
+    try {
+      const res = await fetch('/api/gallery');
+      const data = await res.json();
+      setImages(data.images || []);
+    } catch {
+      // Gallery API not available (no blob store configured yet)
+      setImages([]);
+    } finally {
+      setLoading(false);
     }
   }, []);
 
-  function save(updated: GalleryImage[]) {
-    setImages(updated);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-  }
+  useEffect(() => {
+    if (isAuthenticated()) setAuthenticated(true);
+    fetchImages();
+  }, [fetchImages]);
 
   function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -52,31 +59,79 @@ export default function CommunityGallery() {
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      setPendingFile(ev.target?.result as string);
-      setPendingCaption('');
-    };
-    reader.readAsDataURL(file);
+    if (file.size > 4.5 * 1024 * 1024) {
+      alert('File is too large. Maximum size is 4.5MB.');
+      return;
+    }
+    setPendingFile(file);
+    setPendingCaption('');
+    // Create a preview URL
+    const url = URL.createObjectURL(file);
+    setPendingPreview(url);
     e.target.value = '';
   }
 
-  function handleAddImage() {
+  async function handleAddImage() {
     if (!pendingFile) return;
-    const newImage: GalleryImage = {
-      id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
-      src: pendingFile,
-      caption: pendingCaption.trim(),
-      uploadedAt: Date.now(),
-    };
-    save([newImage, ...images]);
-    setPendingFile(null);
-    setPendingCaption('');
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', pendingFile);
+      formData.append('caption', pendingCaption.trim());
+
+      const res = await fetch('/api/gallery', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || 'Upload failed');
+      }
+
+      const uploaded = await res.json();
+      setImages(prev => [{
+        url: uploaded.url,
+        pathname: uploaded.pathname,
+        caption: uploaded.caption,
+        uploadedAt: uploaded.uploadedAt,
+      }, ...prev]);
+
+      setPendingFile(null);
+      if (pendingPreview) URL.revokeObjectURL(pendingPreview);
+      setPendingPreview(null);
+      setPendingCaption('');
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'Upload failed. Please try again.');
+    } finally {
+      setUploading(false);
+    }
   }
 
-  function handleDelete(id: string) {
-    save(images.filter(img => img.id !== id));
-    if (lightbox?.id === id) setLightbox(null);
+  async function handleDelete(pathname: string) {
+    setDeleting(pathname);
+    try {
+      const res = await fetch('/api/gallery/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pathname }),
+      });
+      if (res.ok) {
+        setImages(prev => prev.filter(img => img.pathname !== pathname));
+        if (lightbox?.pathname === pathname) setLightbox(null);
+      }
+    } catch {
+      alert('Failed to delete photo.');
+    } finally {
+      setDeleting(null);
+    }
+  }
+
+  function cancelPending() {
+    setPendingFile(null);
+    if (pendingPreview) URL.revokeObjectURL(pendingPreview);
+    setPendingPreview(null);
+    setPendingCaption('');
   }
 
   return (
@@ -93,7 +148,8 @@ export default function CommunityGallery() {
               <>
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl text-white text-sm font-medium transition-opacity hover:opacity-90"
+                  disabled={uploading}
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl text-white text-sm font-medium transition-opacity hover:opacity-90 disabled:opacity-50"
                   style={{ backgroundColor: '#4A90D9' }}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -181,11 +237,11 @@ export default function CommunityGallery() {
         )}
 
         {/* Upload preview / caption form */}
-        {pendingFile && (
+        {pendingPreview && (
           <div className="bg-white rounded-2xl shadow-sm border border-blue-200 p-6 flex flex-col sm:flex-row gap-6 items-start mb-8">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={pendingFile}
+              src={pendingPreview}
               alt="Preview"
               className="w-full sm:w-48 h-48 object-cover rounded-xl"
             />
@@ -204,14 +260,26 @@ export default function CommunityGallery() {
               <div className="flex gap-3">
                 <button
                   onClick={handleAddImage}
-                  className="px-5 py-2 rounded-xl text-white text-sm font-medium transition-opacity hover:opacity-90"
+                  disabled={uploading}
+                  className="px-5 py-2 rounded-xl text-white text-sm font-medium transition-opacity hover:opacity-90 disabled:opacity-50 flex items-center gap-2"
                   style={{ backgroundColor: '#1B3A5C' }}
                 >
-                  Add to Gallery
+                  {uploading ? (
+                    <>
+                      <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                      </svg>
+                      Uploading...
+                    </>
+                  ) : (
+                    'Add to Gallery'
+                  )}
                 </button>
                 <button
-                  onClick={() => { setPendingFile(null); setPendingCaption(''); }}
-                  className="px-5 py-2 rounded-xl text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors"
+                  onClick={cancelPending}
+                  disabled={uploading}
+                  className="px-5 py-2 rounded-xl text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors disabled:opacity-50"
                 >
                   Cancel
                 </button>
@@ -220,8 +288,16 @@ export default function CommunityGallery() {
           </div>
         )}
 
-        {/* Gallery grid */}
-        {images.length === 0 && !pendingFile ? (
+        {/* Loading state */}
+        {loading ? (
+          <div className="text-center py-20 text-gray-400">
+            <svg className="w-8 h-8 mx-auto mb-3 animate-spin opacity-40" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+            <p className="text-sm">Loading gallery...</p>
+          </div>
+        ) : images.length === 0 && !pendingPreview ? (
           <div className="text-center py-20 text-gray-400">
             <svg className="w-12 h-12 mx-auto mb-4 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -237,10 +313,10 @@ export default function CommunityGallery() {
             )}
             <div className="columns-2 sm:columns-3 lg:columns-4 gap-4 space-y-4">
               {images.map(img => (
-                <div key={img.id} className="break-inside-avoid group relative rounded-xl overflow-hidden bg-gray-100 cursor-pointer">
+                <div key={img.pathname} className="break-inside-avoid group relative rounded-xl overflow-hidden bg-gray-100 cursor-pointer">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={img.src}
+                    src={img.url}
                     alt={img.caption || 'Community photo'}
                     className="w-full h-auto block"
                     onClick={() => setLightbox(img)}
@@ -254,13 +330,21 @@ export default function CommunityGallery() {
                   </div>
                   {authenticated && (
                     <button
-                      onClick={() => handleDelete(img.id)}
-                      className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-auto"
+                      onClick={() => handleDelete(img.pathname)}
+                      disabled={deleting === img.pathname}
+                      className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-auto disabled:opacity-50"
                       title="Delete photo"
                     >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
+                      {deleting === img.pathname ? (
+                        <svg className="w-3 h-3 animate-spin" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                        </svg>
+                      ) : (
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      )}
                     </button>
                   )}
                 </div>
@@ -282,7 +366,7 @@ export default function CommunityGallery() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={lightbox.src}
+              src={lightbox.url}
               alt={lightbox.caption || 'Community photo'}
               className="w-full h-auto max-h-[80vh] object-contain rounded-xl"
             />
