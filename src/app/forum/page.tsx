@@ -74,12 +74,12 @@ export default function ForumPage() {
         } catch { /* ignore */ }
       }
     }
-    setData(loadData());
+    loadData().then(d => setData(d));
   }, []);
 
   function persistData(updated: ForumData) {
     setData(updated);
-    saveData(updated);
+    saveData(updated); // fire-and-forget async save to API
   }
 
   // --- Auth handlers ---

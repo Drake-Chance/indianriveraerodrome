@@ -53,22 +53,28 @@ export const DEFAULT_DATA: ForumData = {
   pendingTopics: [],
 };
 
-export function loadData(): ForumData {
-  if (typeof window === 'undefined') return DEFAULT_DATA;
+export async function loadData(): Promise<ForumData> {
   try {
-    const raw = localStorage.getItem(LS_DATA_KEY);
-    if (!raw) return DEFAULT_DATA;
-    const parsed = JSON.parse(raw) as Record<string, unknown>;
-    // Migrate old format (had 'posts' array, not 'pendingTopics')
-    if ('posts' in parsed && !('pendingTopics' in parsed)) return DEFAULT_DATA;
-    return parsed as unknown as ForumData;
+    const res = await fetch('/api/forum');
+    if (!res.ok) return DEFAULT_DATA;
+    const data = await res.json();
+    if (!data.topics) return DEFAULT_DATA;
+    return data as ForumData;
   } catch {
     return DEFAULT_DATA;
   }
 }
 
-export function saveData(data: ForumData) {
-  localStorage.setItem(LS_DATA_KEY, JSON.stringify(data));
+export async function saveData(data: ForumData): Promise<void> {
+  try {
+    await fetch('/api/forum', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+  } catch {
+    console.error('Failed to save forum data');
+  }
 }
 
 export function countRepliesDeep(replies: Reply[]): number {
