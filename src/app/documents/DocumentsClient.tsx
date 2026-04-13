@@ -177,7 +177,7 @@ export default function DocumentsClient() {
                   {cat.documents.map((doc) => (
                     <a
                       key={doc.id}
-                      href={`/docs/${doc.file}`}
+                      href={doc.file}
                       download
                       className="flex items-center gap-4 p-4 bg-white hover:bg-blue-50 border border-gray-100 hover:border-blue-200 rounded-xl transition-colors group"
                     >
