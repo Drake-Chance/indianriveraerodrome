@@ -2,8 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import directoryData from '@/data/directory.json';
-
-const PASSWORD = 'iraopa2026';
+import { isAuthenticated, authenticate, clearAuth } from '@/lib/auth';
 const LS_KEY = 'irapoa_directory_edits';
 
 type Resident = {
@@ -56,6 +55,7 @@ export default function DirectoryPage() {
   const [stored, setStored] = useState<StoredEdits>({ edits: {}, additions: [], deletions: [] });
 
   useEffect(() => {
+    if (isAuthenticated()) setAuthenticated(true);
     setStored(loadEdits());
   }, []);
 
@@ -86,7 +86,7 @@ export default function DirectoryPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (input === PASSWORD) {
+    if (authenticate(input)) {
       setAuthenticated(true);
       setError('');
     } else {
@@ -283,7 +283,7 @@ export default function DirectoryPage() {
                     </button>
                   )}
                   <button
-                    onClick={() => setAuthenticated(false)}
+                    onClick={() => { clearAuth(); setAuthenticated(false); }}
                     className="text-xs text-gray-400 hover:text-gray-600 underline transition-colors"
                   >
                     Lock directory

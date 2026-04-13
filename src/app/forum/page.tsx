@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { isAuthenticated, authenticate as sharedAuth, clearAuth } from '@/lib/auth';
 import {
   loadData,
   saveData,
@@ -43,16 +44,35 @@ export default function ForumPage() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const saved = localStorage.getItem(LS_USER_KEY);
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (parsed.name) {
-          setUserName(parsed.name);
-          setIsAdmin(parsed.isAdmin || false);
-          setStep('forum');
-        }
-      } catch { /* ignore */ }
+    // Check shared community auth first
+    if (isAuthenticated()) {
+      const saved = localStorage.getItem(LS_USER_KEY);
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed.name) {
+            setUserName(parsed.name);
+            setIsAdmin(parsed.isAdmin || false);
+            setStep('forum');
+          } else {
+            setStep('name');
+          }
+        } catch { setStep('name'); }
+      } else {
+        setStep('name');
+      }
+    } else {
+      const saved = localStorage.getItem(LS_USER_KEY);
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed.name) {
+            setUserName(parsed.name);
+            setIsAdmin(parsed.isAdmin || false);
+            setStep('forum');
+          }
+        } catch { /* ignore */ }
+      }
     }
     setData(loadData());
   }, []);
@@ -65,7 +85,7 @@ export default function ForumPage() {
   // --- Auth handlers ---
   function handlePasswordSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (passwordInput === COMMUNITY_PASSWORD) {
+    if (sharedAuth(passwordInput)) {
       const saved = localStorage.getItem(LS_USER_KEY);
       if (saved) {
         try {

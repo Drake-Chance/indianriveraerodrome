@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { isAuthenticated, authenticate, clearAuth } from '@/lib/auth';
 
-const PASSWORD = 'iraopa2026';
 const STORAGE_KEY = 'irapoa_gallery_v2';
 
 type GalleryImage = {
@@ -24,6 +24,7 @@ export default function CommunityGallery() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    if (isAuthenticated()) setAuthenticated(true);
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
       try { setImages(JSON.parse(stored)); } catch { /* ignore */ }
@@ -37,7 +38,7 @@ export default function CommunityGallery() {
 
   function handleLogin(e: React.FormEvent) {
     e.preventDefault();
-    if (input === PASSWORD) {
+    if (authenticate(input)) {
       setAuthenticated(true);
       setShowLogin(false);
       setError('');
@@ -108,7 +109,7 @@ export default function CommunityGallery() {
                   onChange={handleFileChange}
                 />
                 <button
-                  onClick={() => setAuthenticated(false)}
+                  onClick={() => { clearAuth(); setAuthenticated(false); }}
                   className="text-xs text-gray-400 hover:text-gray-600 underline transition-colors"
                 >
                   Lock

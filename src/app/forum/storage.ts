@@ -1,8 +1,8 @@
 import type { ForumData, Reactions, Reply, Topic } from './types';
+export { COMMUNITY_PASSWORD } from '@/lib/auth';
 
 export const LS_DATA_KEY = 'irapoa_forum_data';
 export const LS_USER_KEY = 'irapoa_forum_user';
-export const COMMUNITY_PASSWORD = 'iraopa2026';
 export const ADMIN_PASSWORD = 'iraopa465';
 
 export const DEFAULT_DATA: ForumData = {

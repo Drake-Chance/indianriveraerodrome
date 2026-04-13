@@ -1,10 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { isAuthenticated, authenticate, clearAuth } from '@/lib/auth';
 
 const LS_KEY = 'irapoa_merch_orders';
-const SS_AUTH_KEY = 'irapoa_merch_auth';
-const PASSWORD = 'iraopa2026';
 
 type MerchItem = {
   id: string;
@@ -96,7 +95,7 @@ export default function MerchPage() {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && sessionStorage.getItem(SS_AUTH_KEY) === '1') {
+    if (typeof window !== 'undefined' && isAuthenticated()) {
       setAuthenticated(true);
     }
     setOrders(loadOrders());
@@ -104,8 +103,7 @@ export default function MerchPage() {
 
   function handlePasswordSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (passwordInput === PASSWORD) {
-      sessionStorage.setItem(SS_AUTH_KEY, '1');
+    if (authenticate(passwordInput)) {
       setAuthenticated(true);
       setPasswordError('');
     } else {
