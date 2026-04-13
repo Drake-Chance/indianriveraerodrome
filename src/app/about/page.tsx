@@ -48,8 +48,8 @@ export default function AboutPage() {
                     { label: 'Airport Name', value: 'Indian River Aerodrome' },
                     { label: 'City', value: 'Vero Beach, FL' },
                     { label: 'County', value: 'Indian River County' },
-                    { label: 'Latitude', value: '27.715306° N' },
-                    { label: 'Longitude', value: '80.451694° W' },
+                    { label: 'Latitude', value: '27.5991° N' },
+                    { label: 'Longitude', value: '80.5024° W' },
                     { label: 'Elevation', value: '~22 ft MSL' },
                     { label: 'Airport Type', value: 'Private / Residential' },
                   ].map((item) => (
@@ -153,7 +153,7 @@ export default function AboutPage() {
           <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-200 aspect-video max-h-96">
             <iframe
               title="Indian River Aerodrome Location"
-              src="https://maps.google.com/maps?q=27.715306,-80.451694&z=14&output=embed"
+              src="https://maps.google.com/maps?q=Indian+River+Aerodrome&ll=27.5991027,-80.5024126&z=15&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -163,7 +163,7 @@ export default function AboutPage() {
             />
           </div>
           <p className="text-center text-gray-500 mt-4 text-sm">
-            Indian River Aerodrome (FL74) · 27°42′55.1″N 80°27′06.1″W · Vero Beach, FL 32966
+            Indian River Aerodrome (FL74) · 27°35′56.8″N 80°30′08.7″W · Vero Beach, FL 32966
           </p>
         </div>
       </section>
