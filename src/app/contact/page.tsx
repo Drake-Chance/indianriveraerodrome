@@ -12,6 +12,8 @@ const boardContacts = [
   { role: 'Treasurer',        name: 'Carole Ballough' },
   { role: 'Secretary',        name: 'Joshua Pageau' },
   { role: 'Airport Manager',  name: 'Ray Dyson' },
+  { role: 'Director',  name: 'Brain Hayes' },
+  { role: 'Director',  name: 'Lamberto Roscioli' },
 ];
 
 export default function ContactPage() {
