@@ -124,7 +124,8 @@ export default function ContactPage() {
               <div className="rounded-2xl p-6 text-white" style={{ backgroundColor: '#4A90D9' }}>
                 <h3 className="font-bold mb-2">Board Meetings</h3>
                 <p className="text-sm text-blue-100 leading-relaxed">
-                  Board meetings are held on the 2nd Tuesday of each month at 6:00 PM.
+                  Board meetings are frequently held on the 2nd Tuesday of each month at 6:00 PM.
+                  Board meeting exact times and locations are sent to all members of the HOA at least a week prior to the meeting. 
                   Location is TBD — meetings rotate at board members&apos; homes.
                   Residents are welcome to attend.
                 </p>
